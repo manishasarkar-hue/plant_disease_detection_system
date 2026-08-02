@@ -1,141 +1,126 @@
-📂 ML Folder Structure
+# 📂 ML Folder Structure
 
+```text
 ml/
-│
 ├── datasets/
 │   ├── raw/
 │   ├── processed/
 │   ├── external/
 │   └── README.md
-│
 ├── notebooks/
 │   ├── 01_eda.ipynb
 │   ├── 02_preprocessing.ipynb
 │   ├── 03_training.ipynb
 │   ├── 04_evaluation.ipynb
 │   └── 05_gradcam.ipynb
-│
 ├── src/
 │   ├── config/
 │   │   ├── config.py
 │   │   └── constants.py
-│   │
 │   ├── data/
 │   │   ├── loader.py
 │   │   ├── preprocessing.py
 │   │   ├── augmentation.py
 │   │   ├── splitter.py
 │   │   └── validators.py
-│   │
 │   ├── models/
 │   │   ├── efficientnet.py
 │   │   ├── mobilenet.py
 │   │   ├── resnet.py
 │   │   └── factory.py
-│   │
 │   ├── training/
 │   │   ├── trainer.py
 │   │   ├── callbacks.py
 │   │   ├── scheduler.py
 │   │   ├── optimizer.py
 │   │   └── losses.py
-│   │
 │   ├── evaluation/
 │   │   ├── metrics.py
 │   │   ├── confusion_matrix.py
 │   │   ├── classification_report.py
 │   │   └── benchmark.py
-│   │
 │   ├── explainability/
 │   │   ├── gradcam.py
 │   │   ├── heatmap.py
 │   │   └── visualization.py
-│   │
 │   ├── inference/
 │   │   ├── predictor.py
 │   │   ├── preprocessing.py
 │   │   ├── postprocessing.py
 │   │   └── pipeline.py
-│   │
 │   ├── deployment/
 │   │   ├── export.py
 │   │   ├── huggingface.py
 │   │   └── versioning.py
-│   │
 │   └── utils/
 │       ├── logger.py
 │       ├── seed.py
 │       ├── file_utils.py
 │       └── helpers.py
-│
 ├── checkpoints/
-│
 ├── models/
-│
 ├── experiments/
-│
 ├── logs/
-│
 ├── tensorboard/
-│
 ├── reports/
-│
 ├── outputs/
 │   ├── predictions/
 │   ├── heatmaps/
 │   └── evaluation/
-│
 ├── tests/
-│
 ├── train.py
 ├── evaluate.py
 ├── inference.py
 ├── requirements.txt
 ├── .env.example
 └── README.md
+```
 
-🧠 ML Pipeline
+## 🧠 ML Pipeline
+
+```text
 Raw Dataset
-      │
-      ▼
+     │
+     ▼
 Data Validation
-      │
-      ▼
+     │
+     ▼
 EDA
-      │
-      ▼
+     │
+     ▼
 Cleaning
-      │
-      ▼
+     │
+     ▼
 Preprocessing
-      │
-      ▼
+     │
+     ▼
 Augmentation
-      │
-      ▼
+     │
+     ▼
 Train / Validation / Test Split
-      │
-      ▼
-Transfer Learning
-(EfficientNetB3)
-      │
-      ▼
+     │
+     ▼
+Transfer Learning (EfficientNetB3)
+     │
+     ▼
 Training
-      │
-      ▼
+     │
+     ▼
 Evaluation
-      │
-      ▼
+     │
+     ▼
 Grad-CAM
-      │
-      ▼
+     │
+     ▼
 Save Best Model
-      │
-      ▼
+     │
+     ▼
 Hugging Face
-      │
-      ▼
+     │
+     ▼
 FastAPI
+```
+
 📊 Dataset
 Source
 

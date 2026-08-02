@@ -1,119 +1,104 @@
-📂 Backend Folder Structure
+# 📂 Backend Folder Structure
 
+```text
 backend/
-│
 ├── app/
 │   ├── main.py
 │   ├── config.py
 │   ├── dependencies.py
 │   ├── lifespan.py
-│   └── logging.py
-│
-├── api/
-│   ├── v1/
+│   ├── logging.py
+│   ├── api/
+│   │   ├── v1/
+│   │   │   ├── auth.py
+│   │   │   ├── prediction.py
+│   │   │   ├── analytics.py
+│   │   │   ├── history.py
+│   │   │   ├── chatbot.py
+│   │   │   ├── weather.py
+│   │   │   ├── feedback.py
+│   │   │   ├── users.py
+│   │   │   └── health.py
+│   │   └── router.py
+│   ├── core/
+│   │   ├── security.py
+│   │   ├── jwt.py
+│   │   ├── hashing.py
+│   │   ├── settings.py
+│   │   ├── constants.py
+│   │   └── exceptions.py
+│   ├── database/
+│   │   ├── session.py
+│   │   ├── base.py
+│   │   ├── models/
+│   │   ├── repositories/
+│   │   └── migrations/
+│   ├── schemas/
 │   │   ├── auth.py
 │   │   ├── prediction.py
 │   │   ├── analytics.py
-│   │   ├── history.py
 │   │   ├── chatbot.py
-│   │   ├── weather.py
-│   │   ├── feedback.py
-│   │   ├── users.py
-│   │   └── health.py
-│   │
-│   └── router.py
-│
-├── core/
-│   ├── security.py
-│   ├── jwt.py
-│   ├── hashing.py
-│   ├── settings.py
-│   ├── constants.py
-│   └── exceptions.py
-│
-├── database/
-│   ├── session.py
-│   ├── base.py
-│   ├── models/
-│   ├── repositories/
-│   └── migrations/
-│
-├── schemas/
-│   ├── auth.py
-│   ├── prediction.py
-│   ├── analytics.py
-│   ├── chatbot.py
-│   ├── history.py
-│   └── user.py
-│
-├── services/
-│   ├── auth_service.py
-│   ├── prediction_service.py
-│   ├── weather_service.py
-│   ├── chatbot_service.py
-│   ├── analytics_service.py
-│   ├── history_service.py
-│   └── report_service.py
-│
-├── ml/
-│   ├── inference.py
-│   ├── preprocessing.py
-│   ├── postprocessing.py
-│   ├── labels.json
-│   ├── download_model.py
-│   └── gradcam.py
-│
-├── rag/
-│   ├── documents/
-│   ├── embeddings.py
-│   ├── chunking.py
-│   ├── vector_store.py
-│   ├── retriever.py
-│   ├── prompts.py
-│   └── rag_service.py
-│
-├── integrations/
-│   ├── gemini.py
-│   ├── weather_api.py
-│   ├── huggingface.py
-│   └── email.py
-│
-├── middleware/
-│   ├── auth.py
-│   ├── cors.py
-│   ├── logging.py
-│   ├── rate_limit.py
-│   └── error_handler.py
-│
-├── utils/
-│   ├── image.py
-│   ├── validators.py
-│   ├── file.py
-│   ├── response.py
-│   └── helpers.py
-│
+│   │   ├── history.py
+│   │   └── user.py
+│   ├── services/
+│   │   ├── auth_service.py
+│   │   ├── prediction_service.py
+│   │   ├── weather_service.py
+│   │   ├── chatbot_service.py
+│   │   ├── analytics_service.py
+│   │   ├── history_service.py
+│   │   └── report_service.py
+│   ├── ml/
+│   │   ├── inference.py
+│   │   ├── preprocessing.py
+│   │   ├── postprocessing.py
+│   │   ├── labels.json
+│   │   ├── download_model.py
+│   │   └── gradcam.py
+│   ├── rag/
+│   │   ├── documents/
+│   │   ├── embeddings.py
+│   │   ├── chunking.py
+│   │   ├── vector_store.py
+│   │   ├── retriever.py
+│   │   ├── prompts.py
+│   │   └── rag_service.py
+│   ├── integrations/
+│   │   ├── gemini.py
+│   │   ├── weather_api.py
+│   │   ├── huggingface.py
+│   │   └── email.py
+│   ├── middleware/
+│   │   ├── auth.py
+│   │   ├── cors.py
+│   │   ├── logging.py
+│   │   ├── rate_limit.py
+│   │   └── error_handler.py
+│   └── utils/
+│       ├── image.py
+│       ├── validators.py
+│       ├── file.py
+│       ├── response.py
+│       └── helpers.py
 ├── tests/
 │   ├── unit/
 │   ├── integration/
 │   └── api/
-│
 ├── scripts/
-│
 ├── docs/
-│
 ├── static/
-│
 ├── uploads/
-│
 ├── Dockerfile
 ├── docker-compose.yml
 ├── requirements.txt
 ├── .env.example
 ├── alembic.ini
 └── README.md
+```
 
-🚀 Backend Architecture
+## 🚀 Backend Architecture
 
+```text
                 React Frontend
                        │
                HTTPS REST API
@@ -135,6 +120,8 @@ Database                  TensorFlow Inference
       └──────────────┬─────────────────┘
                      ▼
                PostgreSQL Database
+```
+
 
 
   📌 API Routes

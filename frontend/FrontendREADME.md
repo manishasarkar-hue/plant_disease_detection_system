@@ -1,17 +1,20 @@
-React 19
-Vite
-TypeScript
-TailwindCSS
-Framer Motion
-GSAP
-React Query (TanStack Query)
-React Hook Form + Zod
-Axios
-React Router
-Shadcn UI
+# 🎨 Frontend Folder Structure
 
+### Tech Stack
+- React 19
+- Vite
+- TypeScript
+- TailwindCSS
+- Framer Motion
+- GSAP
+- React Query (TanStack Query)
+- React Hook Form + Zod
+- Axios
+- React Router
+- Shadcn UI
+
+```text
 frontend/
-│
 ├── public/
 │   ├── favicon.ico
 │   ├── robots.txt
@@ -23,90 +26,75 @@ frontend/
 │   │   └── placeholders/
 │   ├── fonts/
 │   └── lottie/
-│
 ├── src/
-│
-├── app/
-│   ├── App.tsx
-│   ├── routes.tsx
-│   ├── providers.tsx
-│   └── layouts/
-│
-├── pages/
-│   ├── Landing/
-│   ├── Login/
-│   ├── Register/
-│   ├── Dashboard/
-│   ├── Detection/
-│   ├── History/
-│   ├── Analytics/
-│   ├── Chatbot/
-│   ├── Profile/
-│   ├── Settings/
-│   ├── About/
-│   ├── Contact/
-│   └── NotFound/
-│
-├── components/
-│   ├── common/
-│   ├── ui/
-│   ├── layout/
-│   ├── dashboard/
-│   ├── prediction/
-│   ├── analytics/
-│   ├── chatbot/
-│   ├── forms/
-│   ├── weather/
+│   ├── app/
+│   │   ├── App.tsx
+│   │   ├── routes.tsx
+│   │   ├── providers.tsx
+│   │   └── layouts/
+│   ├── pages/
+│   │   ├── Landing/
+│   │   ├── Login/
+│   │   ├── Register/
+│   │   ├── Dashboard/
+│   │   ├── Detection/
+│   │   ├── History/
+│   │   ├── Analytics/
+│   │   ├── Chatbot/
+│   │   ├── Profile/
+│   │   ├── Settings/
+│   │   ├── About/
+│   │   ├── Contact/
+│   │   └── NotFound/
+│   ├── components/
+│   │   ├── common/
+│   │   ├── ui/
+│   │   ├── layout/
+│   │   ├── dashboard/
+│   │   ├── prediction/
+│   │   ├── analytics/
+│   │   ├── chatbot/
+│   │   ├── forms/
+│   │   ├── weather/
+│   │   ├── animations/
+│   │   ├── cards/
+│   │   └── modals/
+│   ├── hooks/
+│   ├── services/
+│   │   ├── api.ts
+│   │   ├── auth.ts
+│   │   ├── prediction.ts
+│   │   ├── weather.ts
+│   │   ├── chatbot.ts
+│   │   └── analytics.ts
+│   ├── store/
+│   ├── contexts/
+│   ├── utils/
+│   ├── constants/
+│   ├── config/
+│   ├── types/
+│   ├── assets/
+│   │   ├── icons/
+│   │   ├── illustrations/
+│   │   ├── images/
+│   │   ├── backgrounds/
+│   │   └── videos/
+│   ├── styles/
+│   ├── theme/
 │   ├── animations/
-│   ├── cards/
-│   └── modals/
-│
-├── hooks/
-│
-├── services/
-│   ├── api.ts
-│   ├── auth.ts
-│   ├── prediction.ts
-│   ├── weather.ts
-│   ├── chatbot.ts
-│   └── analytics.ts
-│
-├── store/
-│
-├── contexts/
-│
-├── utils/
-│
-├── constants/
-│
-├── config/
-│
-├── types/
-│
-├── assets/
-│   ├── icons/
-│   ├── illustrations/
-│   ├── images/
-│   ├── backgrounds/
-│   └── videos/
-│
-├── styles/
-│
-├── theme/
-│
-├── animations/
-│
-├── lib/
-│
-├── validation/
-│
-├── data/
-│
-├── tests/
-│
-├── main.tsx
-│
-└── vite-env.d.ts
+│   ├── lib/
+│   ├── validation/
+│   ├── data/
+│   ├── tests/
+│   ├── main.tsx
+│   └── vite-env.d.ts
+├── index.html
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+└── README.md
+```
+
 
 📄 Pages
 
