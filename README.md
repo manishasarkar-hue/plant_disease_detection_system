@@ -67,11 +67,11 @@ PlantGuard-AI/
 
 ## 🛠️ System Modules & Documentation
 
-- [Backend Documentation](file:///c:/Users/SUMIT%20ADAK/Desktop/PlantGuard-AI/backend/README.md)
-- [Frontend Documentation](file:///c:/Users/SUMIT%20ADAK/Desktop/PlantGuard-AI/frontend/FrontendREADME.md)
-- [Machine Learning Documentation](file:///c:/Users/SUMIT%20ADAK/Desktop/PlantGuard-AI/ML/README.md)
-- [Architecture Guide](file:///c:/Users/SUMIT%20ADAK/Desktop/PlantGuard-AI/docs/ARCHITECTURE.md)
-- [API Documentation](file:///c:/Users/SUMIT%20ADAK/Desktop/PlantGuard-AI/docs/API.md)
-- [RAG & Chatbot System](file:///c:/Users/SUMIT%20ADAK/Desktop/PlantGuard-AI/docs/RAG.md)
-- [Dataset Guide](file:///c:/Users/SUMIT%20ADAK/Desktop/PlantGuard-AI/docs/DATASET.md)
-- [Deployment Guide](file:///c:/Users/SUMIT%20ADAK/Desktop/PlantGuard-AI/docs/DEPLOYMENT.md)
+- [Backend Documentation](./backend/README.md)
+- [Frontend Documentation](./frontend/FrontendREADME.md)
+- [Machine Learning Documentation](./ML/README.md)
+- [Architecture Guide](./docs/ARCHITECTURE.md)
+- [API Documentation](./docs/API.md)
+- [RAG & Chatbot System](./docs/RAG.md)
+- [Dataset Guide](./docs/DATASET.md)
+- [Deployment Guide](./docs/DEPLOYMENT.md)
