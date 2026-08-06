@@ -1,6 +1,6 @@
 # 🌱 PlantGuard AI - Plant Disease Detection System
 
-PlantGuard AI is an end-to-end AI-powered plant disease detection, analytics, and farmer assistance system built with FastAPI, React, TensorFlow, and Gemini.
+PlantGuard AI is an end-to-end AI-powered plant disease detection, analytics, and farmer assistance system built with FastAPI, React, TensorFlow, and open ai
 
 ---
 
