@@ -44,7 +44,7 @@ PlantGuard-AI/
 │   ├── index.html
 │   ├── package.json
 │   └── FrontendREADME.md
-├── ML/
+├── ml/
 │   ├── datasets/
 │   ├── notebooks/
 │   ├── src/
@@ -69,7 +69,7 @@ PlantGuard-AI/
 
 - [Backend Documentation](./backend/README.md)
 - [Frontend Documentation](./frontend/FrontendREADME.md)
-- [Machine Learning Documentation](./ML/README.md)
+- [Machine Learning Documentation](./ml/README.md)
 - [Architecture Guide](./docs/ARCHITECTURE.md)
 - [API Documentation](./docs/API.md)
 - [RAG & Chatbot System](./docs/RAG.md)
