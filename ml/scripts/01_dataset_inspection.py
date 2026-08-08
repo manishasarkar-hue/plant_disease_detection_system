@@ -8,7 +8,8 @@ validates image files for corruption, and reports overall dataset metadata.
 import sys
 from pathlib import Path
 from collections import Counter
-from PIL import Image
+# pyrefly: ignore [missing-import]
+from PIL import Image  # type: ignore
 
 # Ensure stdout uses UTF-8 encoding on Windows
 if sys.platform == "win32":
