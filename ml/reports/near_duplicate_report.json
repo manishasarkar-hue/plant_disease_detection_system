@@ -1,0 +1,13 @@
+{
+    "dataset": "PlantGuard AI - PlantVillage",
+    "outer_image_count": 20638,
+    "inner_image_count": 20638,
+    "exact_phash_match_groups": 20624,
+    "unmatched_outer_hash_groups": 0,
+    "unmatched_inner_hash_groups": 0,
+    "hash_distance_threshold": 5,
+    "near_duplicate_pairs": 0,
+    "failed_outer_images": [],
+    "failed_inner_images": [],
+    "near_duplicates": []
+}
