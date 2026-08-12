@@ -1,0 +1,30 @@
+{
+    "total_images": 20624,
+    "train": {
+        "images": 14430,
+        "percentage": 69.97
+    },
+    "validation": {
+        "images": 3087,
+        "percentage": 14.97
+    },
+    "test": {
+        "images": 3107,
+        "percentage": 15.06
+    },
+    "classes": 15,
+    "smallest_class": {
+        "name": "Potato___healthy",
+        "images": 152
+    },
+    "largest_class": {
+        "name": "Tomato__Tomato_YellowLeaf__Curl_Virus",
+        "images": 3208
+    },
+    "imbalance_ratio": 21.1053,
+    "missing_classes": {
+        "train": [],
+        "val": [],
+        "test": []
+    }
+}
