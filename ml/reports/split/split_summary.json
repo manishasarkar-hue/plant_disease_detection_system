@@ -1,0 +1,16 @@
+{
+    "dataset": "PlantGuard AI",
+    "source_dataset": "C:\\Users\\sarka\\OneDrive\\Desktop\\plant_disease_detection_system\\ml\\datasets\\processed\\plantvillage_clean",
+    "output_dataset": "C:\\Users\\sarka\\OneDrive\\Desktop\\plant_disease_detection_system\\ml\\datasets\\processed\\plantvillage_split",
+    "random_seed": 42,
+    "ratios": {
+        "train": 0.7,
+        "validation": 0.15,
+        "test": 0.15
+    },
+    "classes": 15,
+    "total_images": 20624,
+    "train_images": 14430,
+    "validation_images": 3087,
+    "test_images": 3107
+}
