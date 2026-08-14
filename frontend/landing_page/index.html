@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plant Disease Detection System powered by AI. Save your harvest with instant diagnostics.">
+    <title>PlantCare AI - Disease Detection System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.260.0/lucide.min.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="assets/logo.png" alt="Logo">
+            <span>PlantCare AI</span>
+        </div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How it Works</a>
+            <a href="#about">About Us</a>
+        </div>
+        <button class="btn-primary">Try Now</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Save Your Harvest. <br><span class="highlight">Detect Disease</span> Instantly.</h1>
+            <p>Empower your farming with AI-driven plant disease detection. Upload a photo of a leaf and get instant, accurate diagnostics.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary large">Start Diagnosis</button>
+                <button class="btn-secondary large">Learn More</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="image-wrapper">
+                <img src="assets/diseased.png" alt="Diseased plant leaf">
+                <div class="scan-overlay"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2>Why Choose PlantCare AI?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <i data-lucide="zap"></i>
+                <h3>Lightning Fast</h3>
+                <p>Get results in seconds. Our advanced AI model processes images instantly.</p>
+            </div>
+            <div class="feature-card">
+                <i data-lucide="target"></i>
+                <h3>High Accuracy</h3>
+                <p>Trained on thousands of leaves to identify over 50+ diseases accurately.</p>
+            </div>
+            <div class="feature-card">
+                <i data-lucide="shield-check"></i>
+                <h3>Reliable Solutions</h3>
+                <p>Receive actionable treatment plans to save your crops immediately.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="works-content">
+            <h2>Seamless Detection Process</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h3>Capture or Upload</h3>
+                        <p>Take a clear photo of the affected plant leaf using your smartphone.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h3>AI Analysis</h3>
+                        <p>Our deep learning models analyze the visual symptoms with precision.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h3>Get Results & Treat</h3>
+                        <p>Receive instant diagnosis and expert-recommended treatment plans.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to protect your plants?</h2>
+            <p>Join thousands of farmers using AI to secure their yield.</p>
+            <button class="btn-primary large">Get Started Today</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <img src="assets/logo.png" alt="Logo">
+                <span>PlantCare AI</span>
+            </div>
+            <p>&copy; 2026 PlantCare AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
