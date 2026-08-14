@@ -77,13 +77,14 @@ body {
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 2.5rem;
 }
 
 .nav-links a {
     text-decoration: none;
     color: var(--cafe-noir);
     font-weight: 500;
+    font-size: 1.15rem;
     position: relative;
     transition: color 0.3s ease;
 }
