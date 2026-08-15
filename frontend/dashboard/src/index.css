@@ -401,6 +401,61 @@ h1, h2, h3, h4, h5, h6 {
   40% { transform: scale(1); }
 }
 
+/* Weather Widget */
+.weather-widget {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem 1.5rem;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  margin-top: 1rem;
+  backdrop-filter: blur(5px);
+}
+
+.weather-widget.loading, .weather-widget.error {
+  justify-content: flex-start;
+  color: var(--text-muted);
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-right: 1px solid var(--border-color);
+  padding-right: 1.5rem;
+}
+
+.weather-icon {
+  color: var(--primary);
+}
+.weather-icon.sun { color: #f59e0b; }
+.weather-icon.cloud { color: #64748b; }
+.weather-icon.rain, .weather-icon.snow, .weather-icon.storm { color: #3b82f6; }
+
+.weather-temp h3 {
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+  color: var(--text-main);
+}
+
+.weather-wind {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.weather-suitability {
+  flex: 1;
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--moss-green);
+  border-radius: 2px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .app-container {
