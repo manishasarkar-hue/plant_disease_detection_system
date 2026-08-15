@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Chatbot from './components/Chatbot';
 import History from './components/History';
 import Reports from './components/Reports';
 import Account from './components/Account';
+import LandingPage from './pages/LandingPage';
 
-function App() {
+function DashboardContent() {
   const [activeTab, setActiveTab] = useState('dashboard');
 
   const renderContent = () => {
@@ -30,6 +32,18 @@ function App() {
         {renderContent()}
       </main>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/dashboard" element={<DashboardContent />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 }
 

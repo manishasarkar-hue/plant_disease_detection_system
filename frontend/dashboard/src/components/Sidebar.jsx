@@ -6,7 +6,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
   return (
     <aside className="sidebar">
       <div className="sidebar-header">
-        <img src="../../landing_page/assets/logo.png" alt="Logo" className="logo-icon" onError={(e) => e.target.src='https://via.placeholder.com/40'} />
+        <img src="/assets/logo.png" alt="Logo" className="logo-icon" onError={(e) => e.target.src='https://via.placeholder.com/40'} />
         <h2>PlantCare AI</h2>
       </div>
       
