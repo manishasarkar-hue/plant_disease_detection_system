@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CalendarClock, Check, Clock, Calendar as CalendarIcon, Plus, Trash2 } from 'lucide-react';
+import '../styles/scheduler.css';
 
 const Scheduler = () => {
   const [tasks, setTasks] = useState([]);

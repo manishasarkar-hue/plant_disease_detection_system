@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutDashboard, History, FileText, User, LogOut } from 'lucide-react';
+import { LayoutDashboard, History, FileText, User, LogOut, CalendarClock, BarChart2 } from 'lucide-react';
 import WeatherWidget from './WeatherWidget';
 
 const Sidebar = ({ activeTab, setActiveTab }) => {
@@ -31,6 +31,20 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
         >
           <FileText size={20} />
           <span>Diagnosis Reports</span>
+        </button>
+        <button 
+          className={`nav-item ${activeTab === 'scheduler' ? 'active' : ''}`}
+          onClick={() => setActiveTab('scheduler')}
+        >
+          <CalendarClock size={20} />
+          <span>Scheduler</span>
+        </button>
+        <button 
+          className={`nav-item ${activeTab === 'trackers' ? 'active' : ''}`}
+          onClick={() => setActiveTab('trackers')}
+        >
+          <BarChart2 size={20} />
+          <span>Trackers</span>
         </button>
         <button 
           className={`nav-item ${activeTab === 'account' ? 'active' : ''}`}

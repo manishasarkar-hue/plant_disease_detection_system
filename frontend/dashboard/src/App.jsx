@@ -5,6 +5,8 @@ import Chatbot from './components/Chatbot';
 import History from './components/History';
 import Reports from './components/Reports';
 import Account from './components/Account';
+import Scheduler from './components/Scheduler';
+import Trackers from './components/Trackers';
 import LandingPage from './pages/LandingPage';
 
 function DashboardContent() {
@@ -18,6 +20,10 @@ function DashboardContent() {
         return <History />;
       case 'reports':
         return <Reports />;
+      case 'scheduler':
+        return <Scheduler />;
+      case 'trackers':
+        return <Trackers />;
       case 'account':
         return <Account />;
       default:
