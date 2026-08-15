@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { Zap, Target, ShieldCheck } from 'lucide-react';
 import '../styles/landing.css';
 
@@ -15,7 +16,7 @@ const LandingPage = () => {
   const worksRef = useRef(null);
   const ctaRef = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     // Navbar Scroll Effect
     const handleScroll = () => {
       if (window.scrollY > 50) {
