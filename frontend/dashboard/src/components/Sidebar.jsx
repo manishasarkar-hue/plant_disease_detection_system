@@ -1,5 +1,6 @@
 import React from 'react';
 import { LayoutDashboard, History, FileText, User, LogOut } from 'lucide-react';
+import WeatherWidget from './WeatherWidget';
 
 const Sidebar = ({ activeTab, setActiveTab }) => {
   return (
@@ -39,6 +40,10 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
           <span>Account</span>
         </button>
       </nav>
+      
+      <div className="sidebar-weather-container">
+        <WeatherWidget />
+      </div>
       
       <div className="sidebar-footer">
         <a href="http://localhost:8000" className="nav-item">
