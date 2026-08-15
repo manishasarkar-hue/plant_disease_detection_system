@@ -96,7 +96,11 @@ const Chatbot = () => {
           {messages.map((msg) => (
             <div key={msg.id} className={`message ${msg.sender}-message`}>
               <div className="avatar">
-                {msg.sender === 'bot' ? <Bot size={20} /> : <User size={20} />}
+                {msg.sender === 'bot' ? (
+                  <img src="/chatbot_logo.jpg" alt="Bot" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+                ) : (
+                  <User size={20} />
+                )}
               </div>
               <div className="message-content">
                 {msg.image && <img src={msg.image} alt="Uploaded plant leaf" />}
@@ -107,7 +111,9 @@ const Chatbot = () => {
           
           {isTyping && (
             <div className="message bot-message">
-              <div className="avatar"><Bot size={20} /></div>
+              <div className="avatar">
+                <img src="/chatbot_logo.jpg" alt="Bot" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+              </div>
               <div className="message-content">
                 <div className="typing-indicator">
                   <div className="typing-dot"></div>
