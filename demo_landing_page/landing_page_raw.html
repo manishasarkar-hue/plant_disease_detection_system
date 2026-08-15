@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PlantGuard AI - Precision Botanical Intelligence</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- GSAP for Animations -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<!-- Tailwind CSS Config -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e2e2e2",
+                        "tertiary-container": "#7c3a55",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb0cc",
+                        "secondary": "#586059",
+                        "surface-tint": "#3b6934",
+                        "on-primary-fixed-variant": "#23501e",
+                        "surface-bright": "#f9f9f9",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#ffaac8",
+                        "surface-dim": "#dadada",
+                        "error": "#ba1a1a",
+                        "primary": "#154212",
+                        "background": "#f9f9f9",
+                        "surface-container-low": "#f4f3f3",
+                        "secondary-fixed": "#dde5db",
+                        "surface": "#f9f9f9",
+                        "surface-variant": "#e2e2e2",
+                        "on-secondary-fixed": "#161d17",
+                        "inverse-primary": "#a1d494",
+                        "on-secondary-container": "#5e665f",
+                        "on-tertiary-fixed-variant": "#71314c",
+                        "tertiary": "#60233e",
+                        "surface-container-high": "#e8e8e8",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#eeeeee",
+                        "inverse-surface": "#2f3131",
+                        "on-primary": "#ffffff",
+                        "outline": "#72796e",
+                        "secondary-container": "#dde5db",
+                        "inverse-on-surface": "#f1f1f1",
+                        "on-primary-container": "#9dd090",
+                        "secondary-fixed-dim": "#c1c9bf",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#ffd9e4",
+                        "primary-fixed": "#bcf0ae",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#414942",
+                        "on-primary-fixed": "#002201",
+                        "on-tertiary-fixed": "#3b0520",
+                        "on-surface": "#1a1c1c",
+                        "on-error": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "outline-variant": "#c2c9bb",
+                        "primary-fixed-dim": "#a1d494",
+                        "primary-container": "#2d5a27",
+                        "on-surface-variant": "#42493e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "container-max-width": "1280px",
+                        "section-v-padding": "120px",
+                        "margin-mobile": "20px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                        "display-lg-mobile": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "display-lg": ["80px", {"lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined.fill { font-variation-settings: 'FILL' 1; }
+        
+        /* Custom UI Patterns */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(229, 229, 229, 0.5);
+        }
+        
+        .scanner-bracket {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-color: theme('colors.primary-container');
+        }
+        .scanner-bracket-tl { top: 0; left: 0; border-top: 2px solid; border-left: 2px solid; }
+        .scanner-bracket-tr { top: 0; right: 0; border-top: 2px solid; border-right: 2px solid; }
+        .scanner-bracket-bl { bottom: 0; left: 0; border-bottom: 2px solid; border-left: 2px solid; }
+        .scanner-bracket-br { bottom: 0; right: 0; border-bottom: 2px solid; border-right: 2px solid; }
+        
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, theme('colors.primary-container'), transparent);
+            animation: scan 3s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { top: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        .gsap-reveal { opacity: 0; visibility: hidden; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased overflow-x-hidden selection:bg-primary-container selection:text-white">
+<!-- 1. TopNavBar (Sticky) -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-container/80 backdrop-blur-md border-b border-outline-variant/30 transition-all duration-300" id="topNav">
+<div class="flex justify-between items-center px-gutter py-4 max-w-container-max-width mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed tracking-tight">
+                PlantGuard AI
+            </div>
+<div class="hidden md:flex items-center space-x-8">
+<!-- Navigation links from JSON -->
+<a class="text-on-surface-variant dark:text-on-secondary-container hover:text-primary transition-colors text-body-md font-body-md" href="#how-it-works">How it Works</a>
+<a class="text-on-surface-variant dark:text-on-secondary-container hover:text-primary transition-colors text-body-md font-body-md" href="#features">Features</a>
+<a class="text-on-surface-variant dark:text-on-secondary-container hover:text-primary transition-colors text-body-md font-body-md" href="#gallery">Gallery</a>
+<a class="text-on-surface-variant dark:text-on-secondary-container hover:text-primary transition-colors text-body-md font-body-md" href="#analysis">Analysis</a>
+</div>
+<div class="flex items-center">
+<button class="bg-primary-container text-on-secondary px-6 py-3 rounded-lg font-body-md text-body-md hover:opacity-80 active:scale-95 transition-all duration-300">
+                    Get Started
+                </button>
+</div>
+</div>
+</nav>
+<!-- 2. HERO Section -->
+<section class="relative pt-[160px] pb-section-v-padding px-gutter min-h-screen flex items-center overflow-hidden">
+<div class="max-w-container-max-width mx-auto grid grid-cols-1 lg:grid-cols-2 gap-stack-lg items-center relative z-10 w-full">
+<div class="space-y-stack-lg z-20 gsap-hero-text">
+<div class="inline-flex items-center px-4 py-2 rounded-full bg-secondary-container text-primary-container font-label-caps text-label-caps border border-outline-variant/50">
+<span class="w-2 h-2 rounded-full bg-primary-container mr-2 animate-pulse"></span>
+                    Version 2.0 Live
+                </div>
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-primary tracking-tight leading-tight">
+                    Smarter Care <br/>
+<span class="text-on-surface-variant">for Healthier</span> <br/>
+                    Plants
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+                    Leverage high-fidelity artificial intelligence for instantaneous botanical diagnostics. Preserve organic life with precision analysis.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 pt-4">
+<button class="bg-primary-container text-on-secondary px-8 py-4 rounded-lg font-body-md text-body-md hover:opacity-90 transition-opacity w-full sm:w-auto text-center">
+                        Start Scanning
+                    </button>
+<button class="bg-transparent text-primary-container border border-primary-container px-8 py-4 rounded-lg font-body-md text-body-md hover:bg-secondary-container/50 transition-colors w-full sm:w-auto text-center">
+                        View Research Data
+                    </button>
+</div>
+</div>
+<div class="relative h-[500px] lg:h-[700px] w-full rounded-2xl overflow-hidden glass-panel border border-outline-variant/30 gsap-hero-model">
+<!-- STITCH_THREEJS_START:ANIMATION_2 class="absolute inset-0 w-full h-full" -->
+<div class="absolute inset-0 w-full h-full" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_2" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_2');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  // Three.js Scene: Hero Floating Leaf
+// A premium, realistic 3D leaf that floats and responds to mouse movement
+
+const scene = new THREE.Scene();
+const width = container.clientWidth || window.innerWidth;
+const height = container.clientHeight || window.innerHeight;
+const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+renderer.setSize(width, height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+container.appendChild(renderer.domElement);
+
+// Lighting
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.position.set(5, 5, 5);
+scene.add(directionalLight);
+
+const pointLight = new THREE.PointLight(0x2D5A27, 2);
+pointLight.position.set(-5, -2, 2);
+scene.add(pointLight);
+
+// Leaf Geometry Construction (Simplified high-end silhouette)
+// Using a curved PlaneGeometry to simulate a leaf shape
+const leafGroup = new THREE.Group();
+
+const leafShape = new THREE.Shape();
+leafShape.moveTo(0, 0);
+leafShape.bezierCurveTo(2, 2, 2, 4, 0, 6);
+leafShape.bezierCurveTo(-2, 4, -2, 2, 0, 0);
+
+const geometry = new THREE.ExtrudeGeometry(leafShape, {
+    depth: 0.1,
+    bevelEnabled: true,
+    bevelThickness: 0.05,
+    bevelSize: 0.1,
+    bevelSegments: 5
+});
+
+const material = new THREE.MeshPhongMaterial({
+    color: 0x2D5A27,
+    shininess: 100,
+    flatShading: false,
+});
+
+const leaf = new THREE.Mesh(geometry, material);
+leaf.rotation.x = -Math.PI / 2;
+leaf.scale.set(0.8, 0.8, 0.8);
+leafGroup.add(leaf);
+
+// Add a central vein
+const veinGeom = new THREE.CylinderGeometry(0.02, 0.02, 6, 8);
+const veinMat = new THREE.MeshPhongMaterial({ color: 0x1a3317 });
+const vein = new THREE.Mesh(veinGeom, veinMat);
+vein.position.y = 3;
+leafGroup.add(vein);
+
+scene.add(leafGroup);
+
+camera.position.z = 8;
+camera.position.y = 2;
+
+// Mouse Movement Handling
+let mouseX = 0;
+let mouseY = 0;
+let targetX = 0;
+let targetY = 0;
+
+window.addEventListener('mousemove', (event) => {
+    mouseX = (event.clientX / window.innerWidth) - 0.5;
+    mouseY = (event.clientY / window.innerHeight) - 0.5;
+});
+
+window.addEventListener('resize', () => {
+    const w = container.clientWidth || window.innerWidth;
+    const h = container.clientHeight || window.innerHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+});
+
+function animate() {
+    requestAnimationFrame(animate);
+    
+    targetX += (mouseX - targetX) * 0.05;
+    targetY += (mouseY - targetY) * 0.05;
+
+    leafGroup.rotation.y = targetX * 0.5;
+    leafGroup.rotation.x = targetY * 0.3;
+    
+    // Subtle floating
+    leafGroup.position.y = Math.sin(Date.now() * 0.001) * 0.2;
+    
+    renderer.render(scene, camera);
+}
+
+animate();
+
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_2 -->
+<!-- Floating Indicators -->
+<div class="absolute top-[10%] left-[5%] glass-panel px-4 py-3 rounded-lg flex items-center space-x-3 shadow-sm transform hover:-translate-y-1 transition-transform">
+<span class="material-symbols-outlined text-primary-container">verified</span>
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant">TARGET ACCURACY</div>
+<div class="font-headline-md text-[20px] font-bold text-primary">92%</div>
+</div>
+</div>
+<div class="absolute bottom-[20%] left-[10%] glass-panel px-4 py-3 rounded-lg flex items-center space-x-3 shadow-sm transform hover:-translate-y-1 transition-transform">
+<span class="material-symbols-outlined text-primary-container">biotech</span>
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant">DETECTABLE CLASSES</div>
+<div class="font-headline-md text-[20px] font-bold text-primary">15+</div>
+</div>
+</div>
+<div class="absolute top-[30%] right-[5%] glass-panel px-4 py-3 rounded-lg flex items-center space-x-3 shadow-sm transform hover:-translate-y-1 transition-transform">
+<span class="material-symbols-outlined text-primary-container">bolt</span>
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant">ANALYSIS TIME</div>
+<div class="font-headline-md text-[20px] font-bold text-primary">2s</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Background Tonal Shift -->
+<div class="absolute top-0 right-0 w-1/2 h-full bg-surface-container-high/30 rounded-bl-[100px] -z-10"></div>
+</section>
+<!-- 3. STATS Section -->
+<section class="py-stack-lg border-y border-outline-variant/30 bg-surface-bright">
+<div class="max-w-container-max-width mx-auto px-gutter">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-lg divide-y md:divide-y-0 md:divide-x divide-outline-variant/30">
+<div class="text-center md:text-left px-4 py-4 gsap-stat">
+<div class="font-display-lg-mobile text-display-lg-mobile text-primary-container mb-2">20K+</div>
+<div class="font-body-md text-body-md text-on-surface-variant uppercase tracking-wider text-sm font-semibold">Images Analyzed</div>
+</div>
+<div class="text-center md:text-left px-4 py-4 md:pl-12 gsap-stat">
+<div class="font-display-lg-mobile text-display-lg-mobile text-primary-container mb-2">15+</div>
+<div class="font-body-md text-body-md text-on-surface-variant uppercase tracking-wider text-sm font-semibold">Disease Classes</div>
+</div>
+<div class="text-center md:text-left px-4 py-4 md:pl-12 gsap-stat">
+<div class="font-display-lg-mobile text-display-lg-mobile text-primary-container mb-2">92%</div>
+<div class="font-body-md text-body-md text-on-surface-variant uppercase tracking-wider text-sm font-semibold">Target Accuracy</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. HOW IT WORKS -->
+<section class="py-section-v-padding px-gutter bg-surface" id="how-it-works">
+<div class="max-w-container-max-width mx-auto">
+<div class="mb-stack-lg max-w-2xl gsap-reveal">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Precision Workflow</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">A streamlined, four-step process designed to deliver actionable botanical insights instantly.</p>
+</div>
+<div class="relative mt-20">
+<!-- Connecting Line -->
+<div class="hidden md:block absolute top-8 left-0 w-full h-[1px] bg-outline-variant/50 z-0"></div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-stack-lg relative z-10">
+<!-- Step 1 -->
+<div class="bg-surface p-6 gsap-step">
+<div class="w-16 h-16 rounded-full bg-secondary-container text-primary-container flex items-center justify-center font-headline-md text-[24px] mb-6 border border-outline-variant/30">01</div>
+<h3 class="font-body-lg text-body-lg font-semibold text-on-surface mb-2">Capture</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Take a clear photograph of the affected plant leaf using your device.</p>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface p-6 gsap-step">
+<div class="w-16 h-16 rounded-full bg-secondary-container text-primary-container flex items-center justify-center font-headline-md text-[24px] mb-6 border border-outline-variant/30">02</div>
+<h3 class="font-body-lg text-body-lg font-semibold text-on-surface mb-2">Upload</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Securely upload the image to our neural network for processing.</p>
+</div>
+<!-- Step 3 -->
+<div class="bg-surface p-6 gsap-step">
+<div class="w-16 h-16 rounded-full bg-secondary-container text-primary-container flex items-center justify-center font-headline-md text-[24px] mb-6 border border-outline-variant/30">03</div>
+<h3 class="font-body-lg text-body-lg font-semibold text-on-surface mb-2">Analyze</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">The AI cross-references visual markers against thousands of pathological profiles.</p>
+</div>
+<!-- Step 4 -->
+<div class="bg-surface p-6 gsap-step">
+<div class="w-16 h-16 rounded-full bg-secondary-container text-primary-container flex items-center justify-center font-headline-md text-[24px] mb-6 border border-outline-variant/30">04</div>
+<h3 class="font-body-lg text-body-lg font-semibold text-on-surface mb-2">Diagnose</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Receive an instant, high-confidence diagnosis with targeted treatment plans.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. FEATURES (Asymmetrical Bento) -->
+<section class="py-section-v-padding px-gutter bg-surface-container-low" id="features">
+<div class="max-w-container-max-width mx-auto">
+<div class="mb-stack-lg max-w-2xl gsap-reveal">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Core Capabilities</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Architected for professionals, designed for organic integration.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[300px]">
+<!-- Feature 1: Large Left -->
+<div class="md:col-span-8 bg-surface-container-highest rounded-2xl p-8 border border-outline-variant/30 relative overflow-hidden flex flex-col justify-end gsap-card group">
+<div class="absolute inset-0 bg-secondary-container/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<span class="material-symbols-outlined text-primary-container text-[48px] absolute top-8 left-8">memory</span>
+<div class="relative z-10">
+<h3 class="font-headline-md text-[24px] text-primary mb-2">AI Powered Detection</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">Utilizing state-of-the-art convolutional neural networks to identify subtle pathological patterns invisible to the naked eye.</p>
+</div>
+</div>
+<!-- Feature 2: Small Right Top -->
+<div class="md:col-span-4 bg-[#E8F0E6] rounded-2xl p-8 border border-outline-variant/30 relative overflow-hidden gsap-card">
+<span class="material-symbols-outlined text-primary-container text-[32px] mb-4">timer</span>
+<h3 class="font-body-lg text-body-lg font-semibold text-primary mb-2">Instant Results</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Sub-2 second processing times ensure immediate feedback in the field.</p>
+</div>
+<!-- Feature 3: Small Left Bottom -->
+<div class="md:col-span-5 bg-surface rounded-2xl p-8 border border-outline-variant/30 relative overflow-hidden gsap-card">
+<span class="material-symbols-outlined text-primary-container text-[32px] mb-4">eco</span>
+<h3 class="font-body-lg text-body-lg font-semibold text-primary mb-2">Multiple Plant Support</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Continuously expanding database covering tomatoes, potatoes, bell peppers, and key agricultural crops.</p>
+</div>
+<!-- Feature 4: Medium Right Bottom -->
+<div class="md:col-span-7 bg-surface rounded-2xl p-8 border border-outline-variant/30 relative overflow-hidden flex flex-col justify-end gsap-card bg-cover bg-center" data-alt="A macro, top-down photograph of a healthy, vibrant green leaf placed on a stark white, sterile laboratory table. High-key, natural lighting emphasizes the organic texture of the leaf against the clean, scientific background. The image feels crisp, professional, and modern, aligning with a light-mode, minimalist botanical AI identity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCucy8wsW4WgsvwdxZ-Urv5HBms5ueZYjchwjUey19Z-N-EdvMH7SqTApex14IyhoSPFahkg-aH1XksqXzGhZZkjNEjvCWaLxakk1ZcbQrLBhSKS97LEyiNsY5G48Uu-Tldi7_rstiGxpuiTeuRTYDQ2x3FIPbwj5bfER7uARowiI7QNYpqOujKVo1xbh_HRO7clBIT5gRZ5UbiWRYjUY3I-PCcagSHg7fPGRUbrT5EKo5mWzAW3MrG')">
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-transparent"></div>
+<div class="relative z-10 mt-auto pt-32">
+<span class="material-symbols-outlined text-primary-container text-[32px] mb-2">prescriptions</span>
+<h3 class="font-headline-md text-[24px] text-primary mb-2">Smart Recommendations</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Actionable, environmentally conscious treatment plans prioritized by efficacy and safety.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. DISEASES (Gallery) -->
+<section class="py-section-v-padding px-gutter bg-surface" id="gallery">
+<div class="max-w-container-max-width mx-auto">
+<div class="flex justify-between items-end mb-stack-lg gsap-reveal">
+<div class="max-w-2xl">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Pathology Database</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">A categorized visual reference of commonly detected botanical afflictions.</p>
+</div>
+<button class="hidden md:flex items-center text-primary-container font-label-caps text-label-caps hover:opacity-80 transition-opacity">
+                    VIEW FULL DATABASE <span class="material-symbols-outlined ml-1 text-[16px]">arrow_forward</span>
+</button>
+</div>
+<div class="flex overflow-x-auto pb-8 -mx-gutter px-gutter space-x-6 snap-x snap-mandatory hide-scrollbar">
+<!-- Card 1 -->
+<div class="flex-none w-[300px] bg-secondary-container/20 rounded-2xl overflow-hidden border border-outline-variant/30 snap-start gsap-gallery-item group">
+<div class="h-[200px] w-full bg-cover bg-center overflow-hidden" data-alt="A close-up photograph of a tomato leaf exhibiting early blight symptoms, characterized by dark concentric rings on a slightly yellowing background. The lighting is bright and clinical, set against a neutral, light grey backdrop. The aesthetic is clean, analytical, and highly detailed, emphasizing precision diagnostics in a modern light-mode context." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDtrUG0YxG7JeQvkdsLONg_RmokZmjNpNLVWlDVtUHBmf5oF81Ul8cucZ6IuWzAyCjstkN42AI5yhr43t2CSh8nE9m1pOsgMULkUTbopTIOFmElW780wTLntnAMHsYhRSsi_SE7KinsDZHCZzK3a7EE5UAeZlEp4V1jvlJrupC2yeIB3NmvPMm5JRON304ViaSV4vTpturDlHPQ596xVqR58zEZ3i1rJr3FS6hNKePC2JXWEz_0hhUp')">
+<div class="w-full h-full bg-black/10 group-hover:scale-105 transition-transform duration-700"></div>
+</div>
+<div class="p-6">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">FUNGAL</div>
+<h4 class="font-body-lg text-body-lg font-semibold text-primary">Early Blight</h4>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex-none w-[300px] bg-secondary-container/20 rounded-2xl overflow-hidden border border-outline-variant/30 snap-start gsap-gallery-item group">
+<div class="h-[200px] w-full bg-cover bg-center overflow-hidden" data-alt="A detailed macro shot of a potato leaf showing late blight, with water-soaked, dark irregular lesions. The leaf is illuminated by crisp, diffused white light, isolating the texture against a pristine white background. The visual tone is scientific, minimalistic, and clear, fitting a premium agricultural technology platform." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCDMNxO_3luLrIZ0AfLr5WCeheHwjbd3OWFtg_9JmzW1KKV4sal82Pxj9ZWyOGg_vKboQ25SsfgjLGrEhPKlE1EACLiwpJ6q_nulK5sQPR4NpSuJIpf5AIkaki9JkN410LdUzEjL9Bm56Yu4EBxCRWUtpteSIOBZtGvxPNxIZ8MS51Sgmk2CiXV1CI5pK1i46JNDcP1EYOMgYNkf8YdwoWHoi3YJYlX3Xtrf_pFpeO4plfPeP2kXFo-')">
+<div class="w-full h-full bg-black/10 group-hover:scale-105 transition-transform duration-700"></div>
+</div>
+<div class="p-6">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">OOMYCETE</div>
+<h4 class="font-body-lg text-body-lg font-semibold text-primary">Late Blight</h4>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="flex-none w-[300px] bg-secondary-container/20 rounded-2xl overflow-hidden border border-outline-variant/30 snap-start gsap-gallery-item group">
+<div class="h-[200px] w-full bg-cover bg-center overflow-hidden" data-alt="An analytical close-up of a leaf affected by leaf mold, displaying pale green to yellowish spots on the upper surface. The setting is bright and laboratory-like, with a soft grey background that enhances contrast. The image feels sharp, technical, and modern, aligning with an AI-driven, minimalist botanical tool." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA3VPRdxn7yFtnIswKk0pUGL70Jxlj3OnYq0NdoypSD1Ne-YdOHTaqNgyNMN0zDDybSab6hYO3VsgRDRVMXJUj03fLh7MPqWuJBvv_8USA9NS1MNkIWzDmIC_l9M-jDXlR-SxdZHDCHZgTVp5YPUugJaFd9xKs7mZcfqUmAI1s6okWFkAhq-T3wACs1q6zifSfZohZapOyyfUBUJaYG6MXqbwEOyWrrousYsQvQqb740V_HQodmZKLu')">
+<div class="w-full h-full bg-black/10 group-hover:scale-105 transition-transform duration-700"></div>
+</div>
+<div class="p-6">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">FUNGAL</div>
+<h4 class="font-body-lg text-body-lg font-semibold text-primary">Leaf Mold</h4>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="flex-none w-[300px] bg-secondary-container/20 rounded-2xl overflow-hidden border border-outline-variant/30 snap-start gsap-gallery-item group">
+<div class="h-[200px] w-full bg-cover bg-center overflow-hidden" data-alt="A high-resolution image of a leaf with septoria leaf spot, showing small circular spots with dark borders. The lighting is uniform and bright, placing the subject against a clean, white background to ensure maximum visibility of the symptoms. The overall look is professional, data-centric, and minimal." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCdtOgmqZiQAfbi1HscOk1f7-eObiE4JidhFh9L2z7JgSHW7I1z39r-6yhtjPlTN4ECNWf2QRxo5SeBjWOhp0p8pjBAiRNkA-x9HjYtyCogn-NERozGe3VAEfxIfsOoN-imrxG8c1iGbNrdMwwiFccmBo2f6VFNxXSPJHAvn0sRj7YIGgZ85TLLpUOvv0kzOJa-I5RfGwRhRVBBlsjuOPA_8_sHApTFWEpWxsIqf2KtABYziBAD1y_U')">
+<div class="w-full h-full bg-black/10 group-hover:scale-105 transition-transform duration-700"></div>
+</div>
+<div class="p-6">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">FUNGAL</div>
+<h4 class="font-body-lg text-body-lg font-semibold text-primary">Septoria Leaf Spot</h4>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. AI ANALYSIS SHOWCASE -->
+<section class="py-section-v-padding px-gutter bg-surface-container-highest" id="analysis">
+<div class="max-w-container-max-width mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-stack-lg items-center">
+<!-- Scanner UI -->
+<div class="relative w-full aspect-square md:aspect-video lg:aspect-square bg-surface rounded-2xl border border-outline-variant/30 overflow-hidden gsap-reveal shadow-sm flex items-center justify-center p-8">
+<!-- Base Image -->
+<div class="absolute inset-0 bg-cover bg-center opacity-80" data-alt="A perfectly framed, top-down view of a single, slightly damaged green leaf on a stark white background. The image is evenly lit, highly detailed, and completely devoid of background clutter, resembling a specimen ready for digital scanning. The style is ultra-minimalist, technical, and light-themed." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqB6ezcMXL7uEv7BQ4cmc2Fu4QRUXzO-MMLuKXcA4ktqThfXItd2cIu7KJ3nPjSSP9dAN18Gg17j9q5hYnvsbc0T5ROvbYAtXp6uTBvM5WEiw0UL1Bxi1cV3_aIX0YyKuHCI0JEIX5ChN2PoW9PK-HwqVB5qoP0CVc_TeB67rG1sLeel723h2JWn7SBRmd4jFfSXxhydO6dhnkAUnkEy1hpvh19G4tgV-38d6CE65m-DXq95eFiPsF')"></div>
+<!-- Scanner Overlay (Unique to Product) -->
+<div class="relative w-3/4 h-3/4 z-10">
+<div class="scanner-bracket scanner-bracket-tl"></div>
+<div class="scanner-bracket scanner-bracket-tr"></div>
+<div class="scanner-bracket scanner-bracket-bl"></div>
+<div class="scanner-bracket scanner-bracket-br"></div>
+<div class="scan-line"></div>
+<!-- Diagnostic overlay -->
+<div class="absolute top-4 left-4 bg-surface/90 backdrop-blur-sm px-3 py-1.5 rounded text-xs font-mono text-primary-container border border-primary-container/30">
+                            ANALYZING_MARKERS...
+                        </div>
+</div>
+</div>
+<div class="space-y-stack-md lg:pl-12 gsap-reveal">
+<div class="inline-flex items-center px-4 py-2 rounded-full bg-secondary-container/50 text-on-surface-variant font-label-caps text-label-caps border border-outline-variant/50">
+                        DIAGNOSTIC ENGINE
+                    </div>
+<h2 class="font-headline-md text-headline-md text-primary">Micro-Level Pathology</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                        Our model doesn't just look at the whole leaf; it dissects visual data down to the pixel level, isolating discoloration gradients, necrotic lesion boundaries, and structural deformities.
+                    </p>
+<ul class="space-y-4 pt-6">
+<li class="flex items-start border-b border-outline-variant/30 pb-4">
+<span class="material-symbols-outlined text-primary-container mr-4 mt-1">check_circle</span>
+<div>
+<h4 class="font-body-md text-body-md font-semibold text-primary">Morphological Analysis</h4>
+<p class="text-on-surface-variant text-sm mt-1">Evaluates shape distortions and edge necrosis.</p>
+</div>
+</li>
+<li class="flex items-start border-b border-outline-variant/30 pb-4">
+<span class="material-symbols-outlined text-primary-container mr-4 mt-1">check_circle</span>
+<div>
+<h4 class="font-body-md text-body-md font-semibold text-primary">Colorimetric Profiling</h4>
+<p class="text-on-surface-variant text-sm mt-1">Detects minute shifts in chlorophyll levels.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. FINAL CTA -->
+<section class="py-section-v-padding px-gutter bg-[#E8F0E6] relative overflow-hidden">
+<!-- Abstract Background -->
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<!-- STITCH_THREEJS_START:ANIMATION_3 class="w-full h-full" -->
+<div class="w-full h-full" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_3" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_3');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  // Three.js Scene: CTA Floating Plant
+// A minimal, elegant 3D plant structure for the final CTA section
+
+const scene = new THREE.Scene();
+const width = container.clientWidth || window.innerWidth;
+const height = container.clientHeight || window.innerHeight;
+const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+renderer.setSize(width, height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+container.appendChild(renderer.domElement);
+
+// Lighting
+const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+scene.add(ambientLight);
+
+const pointLight = new THREE.PointLight(0xffffff, 1);
+pointLight.position.set(5, 5, 5);
+scene.add(pointLight);
+
+// Simple abstract plant (multiple leaves)
+const plantGroup = new THREE.Group();
+
+function createLeaf(angle, scale) {
+    const leafShape = new THREE.Shape();
+    leafShape.moveTo(0, 0);
+    leafShape.bezierCurveTo(1, 1, 1, 2, 0, 3);
+    leafShape.bezierCurveTo(-1, 2, -1, 1, 0, 0);
+    
+    const geom = new THREE.ShapeGeometry(leafShape);
+    const mat = new THREE.MeshPhongMaterial({ 
+        color: 0x2D5A27, 
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.9
+    });
+    
+    const leaf = new THREE.Mesh(geom, mat);
+    leaf.rotation.z = angle;
+    leaf.scale.set(scale, scale, scale);
+    return leaf;
+}
+
+for (let i = 0; i < 5; i++) {
+    const leaf = createLeaf((i / 5) * Math.PI * 2, 0.8 + Math.random() * 0.4);
+    leaf.rotation.x = Math.random() * 0.5;
+    plantGroup.add(leaf);
+}
+
+scene.add(plantGroup);
+
+camera.position.z = 5;
+
+window.addEventListener('resize', () => {
+    const w = container.clientWidth || window.innerWidth;
+    const h = container.clientHeight || window.innerHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+});
+
+function animate() {
+    requestAnimationFrame(animate);
+    
+    plantGroup.rotation.y += 0.005;
+    plantGroup.position.y = Math.sin(Date.now() * 0.001) * 0.1;
+    
+    renderer.render(scene, camera);
+}
+
+animate();
+
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_3 -->
+</div>
+<div class="max-w-3xl mx-auto text-center relative z-10 gsap-reveal">
+<h2 class="font-display-lg-mobile text-display-lg-mobile md:text-[64px] leading-tight font-bold text-primary mb-6">
+                Ready to protect your plants?
+            </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-xl mx-auto">
+                Join thousands of researchers and agricultural professionals utilizing PlantGuard AI for precision botanical diagnostics.
+            </p>
+<button class="bg-primary-container text-on-secondary px-10 py-5 rounded-xl font-body-lg text-body-lg hover:opacity-90 transition-all shadow-sm hover:shadow-md hover:-translate-y-1">
+                Access the Platform
+            </button>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-6">FREE FOR ACADEMIC USE • NO CREDIT CARD REQUIRED</p>
+</div>
+</section>
+<!-- 9. Footer (From JSON) -->
+<footer class="w-full bg-surface-container-lowest dark:bg-surface-dim border-t border-outline-variant">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg px-gutter py-section-v-padding max-w-container-max-width mx-auto">
+<div>
+<div class="font-headline-md text-headline-md font-bold text-primary mb-4">
+                    PlantGuard AI
+                </div>
+<p class="font-body-md text-body-md text-on-surface-variant dark:text-on-secondary-container max-w-sm">
+                    © 2024 PlantGuard AI. Preserving organic life through precision intelligence.
+                </p>
+</div>
+<div class="flex flex-col md:items-end space-y-4">
+<a class="text-on-surface-variant dark:text-on-secondary-container hover:text-primary transition-colors font-body-md text-body-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-on-secondary-container hover:text-primary transition-colors font-body-md text-body-md" href="#">Terms of Service</a>
+<a class="text-on-surface-variant dark:text-on-secondary-container hover:text-primary transition-colors font-body-md text-body-md" href="#">Scientific Data</a>
+<a class="text-on-surface-variant dark:text-on-secondary-container hover:text-primary transition-colors font-body-md text-body-md" href="#">Contact Us</a>
+</div>
+</div>
+</footer>
+<!-- GSAP Animations -->
+<script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Initial Hero setup to prevent FOUC
+            gsap.set(".gsap-hero-text > *", { y: 30, opacity: 0 });
+            gsap.set(".gsap-hero-model", { scale: 0.9, opacity: 0 });
+
+            // Hero Animation
+            const heroTl = gsap.timeline();
+            heroTl.to(".gsap-hero-text > *", {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: "power3.out",
+                delay: 0.2
+            })
+            .to(".gsap-hero-model", {
+                scale: 1,
+                opacity: 1,
+                duration: 1,
+                ease: "power3.out"
+            }, "-=0.6");
+
+            // Stats Reveal
+            gsap.fromTo(".gsap-stat", 
+                { y: 30, opacity: 0 },
+                { 
+                    y: 0, 
+                    opacity: 1, 
+                    duration: 0.6, 
+                    stagger: 0.2, 
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: ".gsap-stat",
+                        start: "top 85%"
+                    }
+                }
+            );
+
+            // Generic Section Reveals
+            gsap.utils.toArray('.gsap-reveal').forEach(elem => {
+                gsap.fromTo(elem,
+                    { y: 40, autoAlpha: 0 },
+                    {
+                        y: 0,
+                        autoAlpha: 1,
+                        duration: 0.8,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: elem,
+                            start: "top 80%"
+                        }
+                    }
+                );
+            });
+
+            // Steps Sequential Reveal
+            gsap.fromTo(".gsap-step",
+                { y: 40, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    stagger: 0.15,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: "#how-it-works",
+                        start: "top 60%"
+                    }
+                }
+            );
+
+            // Feature Cards Reveal
+            gsap.fromTo(".gsap-card",
+                { y: 50, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: "#features",
+                        start: "top 60%"
+                    }
+                }
+            );
+            
+            // Gallery Reveal
+            gsap.fromTo(".gsap-gallery-item",
+                { x: 50, opacity: 0 },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    stagger: 0.1,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: "#gallery",
+                        start: "top 70%"
+                    }
+                }
+            );
+
+            // Navbar shrink on scroll
+            const topNav = document.getElementById('topNav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    topNav.classList.add('py-2');
+                    topNav.classList.remove('py-4');
+                } else {
+                    topNav.classList.add('py-4');
+                    topNav.classList.remove('py-2');
+                }
+            });
+            
+            // Hide scrollbar utility class insertion
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .hide-scrollbar::-webkit-scrollbar { display: none; }
+                .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body></html>
