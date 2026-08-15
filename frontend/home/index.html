@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - PlantCare AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.260.0/lucide.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../landing_page/assets/logo.png" alt="Logo" class="logo-icon" onerror="this.src='https://via.placeholder.com/40'">
+                <h2>PlantCare AI</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-target="dashboard">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-target="history">
+                    <i data-lucide="history"></i>
+                    <span>History</span>
+                </a>
+                <a href="#" class="nav-item" data-target="reports">
+                    <i data-lucide="file-text"></i>
+                    <span>Diagnosis Reports</span>
+                </a>
+                <a href="#" class="nav-item" data-target="account">
+                    <i data-lucide="user"></i>
+                    <span>Account</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <a href="../landing_page/index.html" class="nav-item">
+                    <i data-lucide="log-out"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Dashboard Tab -->
+            <section id="dashboard" class="tab-content active">
+                <header class="content-header">
+                    <h1>AI Diagnosis Chat</h1>
+                    <p>Upload a photo or describe the symptoms to get a diagnosis.</p>
+                </header>
+
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <!-- Welcome message -->
+                        <div class="message bot-message">
+                            <div class="avatar"><i data-lucide="bot"></i></div>
+                            <div class="message-content">
+                                <p>Hello! I am PlantCare AI. Please upload a clear photo of your plant's diseased leaf, or describe the symptoms you are seeing.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-area">
+                        <!-- Image Upload Preview Area -->
+                        <div class="image-preview-container" id="image-preview-container" style="display: none;">
+                            <img id="image-preview" src="" alt="Preview">
+                            <button id="remove-image" class="icon-btn"><i data-lucide="x"></i></button>
+                        </div>
+                        
+                        <div class="input-wrapper">
+                            <input type="file" id="photo-upload" accept="image/*" capture="environment" hidden>
+                            <button id="upload-btn" class="icon-btn" title="Upload Photo">
+                                <i data-lucide="camera"></i>
+                            </button>
+                            
+                            <input type="text" id="chat-input" placeholder="Ask about a disease or plant care...">
+                            
+                            <button id="send-btn" class="primary-btn">
+                                <i data-lucide="send"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- History Tab -->
+            <section id="history" class="tab-content">
+                <header class="content-header">
+                    <h1>Diagnosis History</h1>
+                    <p>Review your past plant analyses.</p>
+                </header>
+                <div class="empty-state">
+                    <i data-lucide="inbox"></i>
+                    <h3>No history yet</h3>
+                    <p>Your past diagnoses will appear here once you start using the AI.</p>
+                </div>
+            </section>
+
+            <!-- Reports Tab -->
+            <section id="reports" class="tab-content">
+                <header class="content-header">
+                    <h1>Diagnosis Reports</h1>
+                    <p>Detailed reports and treatment plans.</p>
+                </header>
+                <div class="empty-state">
+                    <i data-lucide="file-x-2"></i>
+                    <h3>No reports generated</h3>
+                    <p>Complete a diagnosis to receive a detailed treatment report.</p>
+                </div>
+            </section>
+
+            <!-- Account Tab -->
+            <section id="account" class="tab-content">
+                <header class="content-header">
+                    <h1>Your Account</h1>
+                    <p>Manage your profile and settings.</p>
+                </header>
+                <div class="account-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar"><i data-lucide="user"></i></div>
+                        <div class="profile-info">
+                            <h3>Demo Farmer</h3>
+                            <p>farmer@example.com</p>
+                        </div>
+                    </div>
+                    <button class="primary-btn" style="margin-top: 1rem;">Edit Profile</button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
