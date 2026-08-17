@@ -3,7 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { Zap, Target, ShieldCheck } from 'lucide-react';
+import { 
+  Zap, 
+  Target, 
+  ShieldCheck, 
+  CalendarClock, 
+  BarChart2, 
+  CloudSun, 
+  ArrowRight, 
+  CheckCircle2 
+} from 'lucide-react';
 import '../styles/landing.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -25,7 +34,7 @@ const LandingPage = () => {
         navbarRef.current?.classList.remove('scrolled');
       }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Hero Animations
     const heroTl = gsap.timeline();
@@ -43,8 +52,8 @@ const LandingPage = () => {
 
     gsap.utils.toArray('.feature-card').forEach((card, i) => {
       gsap.from(card, {
-        scrollTrigger: { trigger: ".feature-grid", start: "top 80%" },
-        y: 50, opacity: 0, duration: 0.8, delay: i * 0.15, ease: "power3.out"
+        scrollTrigger: { trigger: card, start: "top 85%" },
+        y: 40, opacity: 0, duration: 0.7, delay: (i % 3) * 0.1, ease: "power3.out"
       });
     });
 
@@ -56,15 +65,15 @@ const LandingPage = () => {
 
     gsap.utils.toArray('.step').forEach((step, i) => {
       gsap.from(step, {
-        scrollTrigger: { trigger: ".steps", start: "top 80%" },
-        x: i % 2 === 0 ? -50 : 50, opacity: 0, duration: 0.8, delay: i * 0.2, ease: "power3.out"
+        scrollTrigger: { trigger: step, start: "top 85%" },
+        x: i % 2 === 0 ? -40 : 40, opacity: 0, duration: 0.8, ease: "power3.out"
       });
     });
 
     // CTA Scroll Animation
     gsap.from(".cta-content", {
-      scrollTrigger: { trigger: ".cta-section", start: "top 80%" },
-      y: 50, opacity: 0, duration: 1, ease: "power3.out"
+      scrollTrigger: { trigger: ".cta-section", start: "top 85%" },
+      y: 40, opacity: 0, duration: 1, ease: "power3.out"
     });
 
     return () => {
@@ -77,8 +86,9 @@ const LandingPage = () => {
     e.preventDefault();
     const targetElement = document.querySelector(targetId);
     if (targetElement) {
+      const topOffset = targetElement.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({
-        top: targetElement.offsetTop - 80,
+        top: topOffset,
         behavior: 'smooth'
       });
     }
@@ -89,7 +99,7 @@ const LandingPage = () => {
       {/* Navbar */}
       <nav className="landing-navbar" ref={navbarRef}>
         <div className="landing-logo">
-          <img src="/assets/logo.png" alt="Logo" />
+          <img src="/assets/logo.png" alt="Logo" onError={(e) => { e.target.style.display = 'none'; }} />
           <span>PlantCare AI</span>
         </div>
         <div className="landing-nav-links">
@@ -106,13 +116,17 @@ const LandingPage = () => {
           <h1>Save Your Harvest. <br/><span className="highlight">Detect Disease</span> Instantly.</h1>
           <p>Empower your farming with AI-driven plant disease detection. Upload a photo of a leaf and get instant, accurate diagnostics.</p>
           <div className="hero-buttons">
-            <button className="landing-btn-primary large" onClick={() => navigate('/dashboard')}>Start Diagnosis</button>
-            <button className="landing-btn-secondary large">Learn More</button>
+            <button className="landing-btn-primary large" onClick={() => navigate('/dashboard')}>
+              Start Diagnosis <ArrowRight size={18} style={{ marginLeft: '6px' }} />
+            </button>
+            <button className="landing-btn-secondary large" onClick={(e) => handleNavClick(e, '#features')}>
+              Explore Features
+            </button>
           </div>
         </div>
         <div className="hero-image">
           <div className="image-wrapper">
-            <img src="/assets/diseased.png" alt="Diseased plant leaf" />
+            <img src="/assets/diseased.png" alt="Diseased plant leaf" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=800&q=80'; }} />
             <div className="scan-overlay"></div>
           </div>
         </div>
@@ -123,19 +137,39 @@ const LandingPage = () => {
         <h2>Why Choose PlantCare AI?</h2>
         <div className="feature-grid">
           <div className="feature-card">
-            <Zap size={48} />
-            <h3>Lightning Fast</h3>
-            <p>Get results in seconds. Our advanced AI model processes images instantly.</p>
+            <Zap size={44} />
+            <h3>Lightning Fast AI</h3>
+            <p>Get results in under 2 seconds. Our optimized deep learning models process leaf images in real-time.</p>
           </div>
+          
           <div className="feature-card">
-            <Target size={48} />
+            <Target size={44} />
             <h3>High Accuracy</h3>
-            <p>Trained on thousands of leaves to identify over 50+ diseases accurately.</p>
+            <p>Trained on over 50,000+ laboratory & field images to accurately identify 50+ plant diseases and deficiencies.</p>
           </div>
+          
           <div className="feature-card">
-            <ShieldCheck size={48} />
-            <h3>Reliable Solutions</h3>
-            <p>Receive actionable treatment plans to save your crops immediately.</p>
+            <ShieldCheck size={44} />
+            <h3>Actionable Solutions</h3>
+            <p>Receive comprehensive, expert-verified chemical and organic treatment plans tailored to save your harvest.</p>
+          </div>
+
+          <div className="feature-card">
+            <CalendarClock size={44} />
+            <h3>Farm Task Scheduler</h3>
+            <p>Plan and automate your daily watering, fertilization, pruning, and harvesting tasks with custom reminders.</p>
+          </div>
+
+          <div className="feature-card">
+            <BarChart2 size={44} />
+            <h3>Interactive Trackers</h3>
+            <p>Monitor moisture levels, pesticide cycles, and crop health progression visually over time with historical charts.</p>
+          </div>
+
+          <div className="feature-card">
+            <CloudSun size={44} />
+            <h3>Weather Intelligence</h3>
+            <p>Live meteorological integration advising on optimal spraying conditions, temperature alerts, and climate suitability.</p>
           </div>
         </div>
       </section>
@@ -149,21 +183,21 @@ const LandingPage = () => {
               <div className="step-number">1</div>
               <div>
                 <h3>Capture or Upload</h3>
-                <p>Take a clear photo of the affected plant leaf using your smartphone.</p>
+                <p>Take a clear photo of the affected plant leaf using your smartphone or upload an existing image.</p>
               </div>
             </div>
             <div className="step">
               <div className="step-number">2</div>
               <div>
                 <h3>AI Analysis</h3>
-                <p>Our deep learning models analyze the visual symptoms with precision.</p>
+                <p>Our deep learning convolutional vision models analyze visual symptoms, lesions, and spots with precision.</p>
               </div>
             </div>
             <div className="step">
               <div className="step-number">3</div>
               <div>
                 <h3>Get Results & Treat</h3>
-                <p>Receive instant diagnosis and expert-recommended treatment plans.</p>
+                <p>Receive an instant diagnosis report along with actionable, expert-recommended treatment solutions.</p>
               </div>
             </div>
           </div>
@@ -174,15 +208,17 @@ const LandingPage = () => {
       <section className="cta-section" ref={ctaRef}>
         <div className="cta-content">
           <h2>Ready to protect your plants?</h2>
-          <p>Join thousands of farmers using AI to secure their yield.</p>
-          <button className="landing-btn-primary large" onClick={() => navigate('/dashboard')}>Get Started Today</button>
+          <p>Join thousands of farmers and gardeners using AI to secure their crop health and maximize yields.</p>
+          <button className="landing-btn-primary large" onClick={() => navigate('/dashboard')}>
+            Get Started Today <ArrowRight size={18} style={{ marginLeft: '6px' }} />
+          </button>
         </div>
       </section>
 
       <footer className="landing-footer">
         <div className="footer-content">
           <div className="landing-logo">
-            <img src="/assets/logo.png" alt="Logo" />
+            <img src="/assets/logo.png" alt="Logo" onError={(e) => { e.target.style.display = 'none'; }} />
             <span>PlantCare AI</span>
           </div>
           <p>&copy; 2026 PlantCare AI. All rights reserved.</p>

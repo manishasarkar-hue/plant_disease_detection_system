@@ -15,7 +15,7 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">
-            <img src="assets/logo.png" alt="Logo">
+            <img src="assets/logo.png" alt="Logo" onerror="this.style.display='none'">
             <span>PlantCare AI</span>
         </div>
         <div class="nav-links">
@@ -23,22 +23,22 @@
             <a href="#how-it-works">How it Works</a>
             <a href="#about">About Us</a>
         </div>
-        <button class="btn-primary" onclick="window.location.href='http://localhost:5173/'">Try Now</button>
+        <button class="btn-primary" onclick="window.location.href='http://localhost:5173/dashboard'">Try Now</button>
     </nav>
 
     <!-- Hero Section -->
-    <header class="hero">
+    <header class="hero" id="about">
         <div class="hero-content">
             <h1>Save Your Harvest. <br><span class="highlight">Detect Disease</span> Instantly.</h1>
             <p>Empower your farming with AI-driven plant disease detection. Upload a photo of a leaf and get instant, accurate diagnostics.</p>
             <div class="hero-buttons">
-                <button class="btn-primary large" onclick="window.location.href='http://localhost:5173/'">Start Diagnosis</button>
-                <button class="btn-secondary large">Learn More</button>
+                <button class="btn-primary large" onclick="window.location.href='http://localhost:5173/dashboard'">Start Diagnosis</button>
+                <button class="btn-secondary large" onclick="document.querySelector('#features').scrollIntoView({behavior: 'smooth'})">Explore Features</button>
             </div>
         </div>
         <div class="hero-image">
             <div class="image-wrapper">
-                <img src="assets/diseased.png" alt="Diseased plant leaf">
+                <img src="assets/diseased.png" alt="Diseased plant leaf" onerror="this.src='https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=800&q=80'">
                 <div class="scan-overlay"></div>
             </div>
         </div>
@@ -50,18 +50,33 @@
         <div class="feature-grid">
             <div class="feature-card">
                 <i data-lucide="zap"></i>
-                <h3>Lightning Fast</h3>
-                <p>Get results in seconds. Our advanced AI model processes images instantly.</p>
+                <h3>Lightning Fast AI</h3>
+                <p>Get results in under 2 seconds. Our optimized deep learning models process leaf images in real-time.</p>
             </div>
             <div class="feature-card">
                 <i data-lucide="target"></i>
                 <h3>High Accuracy</h3>
-                <p>Trained on thousands of leaves to identify over 50+ diseases accurately.</p>
+                <p>Trained on over 50,000+ laboratory & field images to accurately identify 50+ plant diseases and deficiencies.</p>
             </div>
             <div class="feature-card">
                 <i data-lucide="shield-check"></i>
-                <h3>Reliable Solutions</h3>
-                <p>Receive actionable treatment plans to save your crops immediately.</p>
+                <h3>Actionable Solutions</h3>
+                <p>Receive comprehensive, expert-verified chemical and organic treatment plans tailored to save your harvest.</p>
+            </div>
+            <div class="feature-card">
+                <i data-lucide="calendar-clock"></i>
+                <h3>Farm Task Scheduler</h3>
+                <p>Plan and automate your daily watering, fertilization, pruning, and harvesting tasks with custom reminders.</p>
+            </div>
+            <div class="feature-card">
+                <i data-lucide="bar-chart-2"></i>
+                <h3>Interactive Trackers</h3>
+                <p>Monitor moisture levels, pesticide cycles, and crop health progression visually over time with historical charts.</p>
+            </div>
+            <div class="feature-card">
+                <i data-lucide="cloud-sun"></i>
+                <h3>Weather Intelligence</h3>
+                <p>Live meteorological integration advising on optimal spraying conditions, temperature alerts, and climate suitability.</p>
             </div>
         </div>
     </section>
@@ -75,21 +90,21 @@
                     <div class="step-number">1</div>
                     <div>
                         <h3>Capture or Upload</h3>
-                        <p>Take a clear photo of the affected plant leaf using your smartphone.</p>
+                        <p>Take a clear photo of the affected plant leaf using your smartphone or upload an existing image.</p>
                     </div>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
                     <div>
                         <h3>AI Analysis</h3>
-                        <p>Our deep learning models analyze the visual symptoms with precision.</p>
+                        <p>Our deep learning convolutional vision models analyze visual symptoms, lesions, and spots with precision.</p>
                     </div>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
                     <div>
                         <h3>Get Results & Treat</h3>
-                        <p>Receive instant diagnosis and expert-recommended treatment plans.</p>
+                        <p>Receive an instant diagnosis report along with actionable, expert-recommended treatment solutions.</p>
                     </div>
                 </div>
             </div>
@@ -100,15 +115,15 @@
     <section class="cta-section">
         <div class="cta-content">
             <h2>Ready to protect your plants?</h2>
-            <p>Join thousands of farmers using AI to secure their yield.</p>
-            <button class="btn-primary large" onclick="window.location.href='http://localhost:5173/'">Get Started Today</button>
+            <p>Join thousands of farmers and gardeners using AI to secure their crop health and maximize yields.</p>
+            <button class="btn-primary large" onclick="window.location.href='http://localhost:5173/dashboard'">Get Started Today</button>
         </div>
     </section>
 
     <footer>
         <div class="footer-content">
             <div class="logo">
-                <img src="assets/logo.png" alt="Logo">
+                <img src="assets/logo.png" alt="Logo" onerror="this.style.display='none'">
                 <span>PlantCare AI</span>
             </div>
             <p>&copy; 2026 PlantCare AI. All rights reserved.</p>
@@ -116,5 +131,8 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
