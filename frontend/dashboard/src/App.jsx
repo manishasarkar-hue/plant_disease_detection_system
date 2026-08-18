@@ -8,6 +8,8 @@ import Account from './components/Account';
 import Scheduler from './components/Scheduler';
 import Trackers from './components/Trackers';
 import LandingPage from './pages/LandingPage';
+import AuthPage from './pages/AuthPage';
+import { AuthProvider } from './context/AuthContext';
 
 function DashboardContent() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -43,13 +45,17 @@ function DashboardContent() {
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/dashboard" element={<DashboardContent />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/dashboard" element={<DashboardContent />} />
+          <Route path="/login" element={<AuthPage />} />
+          <Route path="/signup" element={<AuthPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

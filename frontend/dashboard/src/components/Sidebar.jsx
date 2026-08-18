@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { LayoutDashboard, History, FileText, User, LogOut, CalendarClock, BarChart2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { 
+  LayoutDashboard, History, FileText, User, 
+  LogOut, CalendarClock, BarChart2, LogIn, Sparkles 
+} from 'lucide-react';
 import WeatherWidget from './WeatherWidget';
+import { useAuth } from '../context/AuthContext';
 
 const Sidebar = ({ activeTab, setActiveTab }) => {
+  const navigate = useNavigate();
+  const { user, isLoggedIn, logout, remainingTrials } = useAuth();
+
   const [userProfile, setUserProfile] = useState({
     fullName: 'Demo Farmer',
     role: 'Pro Agri-Grower',
@@ -27,11 +35,17 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
     const handleUpdate = () => loadProfile();
     window.addEventListener('plantGuardProfileUpdated', handleUpdate);
     return () => window.removeEventListener('plantGuardProfileUpdated', handleUpdate);
-  }, []);
+  }, [user]);
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logout();
+    navigate('/');
+  };
 
   return (
     <aside className="sidebar">
-      <div className="sidebar-header">
+      <div className="sidebar-header" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
         <img src="/assets/logo.png" alt="Logo" className="logo-icon" onError={(e) => e.target.src='https://via.placeholder.com/40'} />
         <h2>PlantCare AI</h2>
       </div>
@@ -85,34 +99,59 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
         <WeatherWidget />
       </div>
 
-      {/* Mini Profile Badge in Sidebar */}
-      <div 
-        className={`sidebar-user-card ${activeTab === 'account' ? 'active' : ''}`}
-        onClick={() => setActiveTab('account')}
-        title="View & Edit Account"
-      >
-        <div className="sidebar-user-avatar">
-          {userProfile.avatarType === 'upload' && userProfile.avatarUrl ? (
-            <img src={userProfile.avatarUrl} alt="Avatar" />
-          ) : (
-            <span>{userProfile.avatarPreset || '🧑‍🌾'}</span>
-          )}
+      {/* Profile or Guest Status Card */}
+      {isLoggedIn ? (
+        <div 
+          className={`sidebar-user-card ${activeTab === 'account' ? 'active' : ''}`}
+          onClick={() => setActiveTab('account')}
+          title="View & Edit Account"
+        >
+          <div className="sidebar-user-avatar">
+            {userProfile.avatarType === 'upload' && userProfile.avatarUrl ? (
+              <img src={userProfile.avatarUrl} alt="Avatar" />
+            ) : (
+              <span>{userProfile.avatarPreset || '🧑‍🌾'}</span>
+            )}
+          </div>
+          <div className="sidebar-user-info">
+            <div className="sidebar-user-name">{user?.fullName || userProfile.fullName}</div>
+            <div className="sidebar-user-role">{user?.role || userProfile.role}</div>
+          </div>
         </div>
-        <div className="sidebar-user-info">
-          <div className="sidebar-user-name">{userProfile.fullName}</div>
-          <div className="sidebar-user-role">{userProfile.role}</div>
+      ) : (
+        <div 
+          className="sidebar-user-card"
+          onClick={() => navigate('/login')}
+          style={{ background: 'rgba(136, 144, 99, 0.25)', borderColor: 'var(--moss-green)' }}
+          title="Sign In for Unlimited Scans"
+        >
+          <div className="sidebar-user-avatar" style={{ background: 'var(--moss-green)', color: '#fff' }}>
+            <Sparkles size={18} />
+          </div>
+          <div className="sidebar-user-info">
+            <div className="sidebar-user-name">Guest Mode</div>
+            <div className="sidebar-user-role" style={{ color: remainingTrials > 0 ? 'var(--kombu-green)' : '#dc2626' }}>
+              {remainingTrials > 0 ? '1 Free Scan Left' : 'Trial Used • Sign In'}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
       
       <div className="sidebar-footer">
-        <a href="http://localhost:8000" className="nav-item">
-          <LogOut size={20} />
-          <span>Logout</span>
-        </a>
+        {isLoggedIn ? (
+          <button onClick={handleLogout} className="nav-item" style={{ width: '100%', cursor: 'pointer' }}>
+            <LogOut size={20} />
+            <span>Logout</span>
+          </button>
+        ) : (
+          <button onClick={() => navigate('/login')} className="nav-item" style={{ width: '100%', color: 'var(--kombu-green)', cursor: 'pointer' }}>
+            <LogIn size={20} />
+            <span>Sign In / Sign Up</span>
+          </button>
+        )}
       </div>
     </aside>
   );
 };
 
 export default Sidebar;
-
