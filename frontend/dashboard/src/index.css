@@ -128,6 +128,75 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
+.sidebar-user-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.sidebar-user-card:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-color: var(--moss-green);
+}
+
+.sidebar-user-card.active {
+  background-color: var(--tan);
+  border-color: var(--moss-green);
+}
+
+.sidebar-user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--tan);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.sidebar-user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sidebar-user-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.sidebar-user-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--kombu-green);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-user-role {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .sidebar-footer {
   flex-shrink: 0;
   margin-top: auto;
@@ -620,6 +689,10 @@ h1, h2, h3, h4, h5, h6 {
     width: auto;
   }
   
+  .sidebar-user-card {
+    display: none;
+  }
+
   .content-header {
     padding: 1rem 1.25rem;
   }
