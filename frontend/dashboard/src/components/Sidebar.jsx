@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
-  LayoutDashboard, History, FileText, User, 
+  LayoutDashboard, ScanLine, History, FileText, User, 
   LogOut, CalendarClock, BarChart2, LogIn, Sparkles 
 } from 'lucide-react';
 import WeatherWidget from './WeatherWidget';
@@ -57,6 +57,13 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
         >
           <LayoutDashboard size={20} />
           <span>Dashboard</span>
+        </button>
+        <button 
+          className={`nav-item ${activeTab === 'scanner' ? 'active' : ''}`}
+          onClick={() => setActiveTab('scanner')}
+        >
+          <ScanLine size={20} />
+          <span>Scan Disease</span>
         </button>
         <button 
           className={`nav-item ${activeTab === 'history' ? 'active' : ''}`}

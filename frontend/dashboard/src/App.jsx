@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Chatbot from './components/Chatbot';
+import PlantScanner from './components/PlantScanner';
 import History from './components/History';
 import Reports from './components/Reports';
 import Account from './components/Account';
@@ -17,11 +18,13 @@ function DashboardContent() {
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard':
-        return <Chatbot />;
+        return <Chatbot setActiveTab={setActiveTab} />;
+      case 'scanner':
+        return <PlantScanner setActiveTab={setActiveTab} />;
       case 'history':
-        return <History />;
+        return <History setActiveTab={setActiveTab} />;
       case 'reports':
-        return <Reports />;
+        return <Reports setActiveTab={setActiveTab} />;
       case 'scheduler':
         return <Scheduler />;
       case 'trackers':
@@ -29,7 +32,7 @@ function DashboardContent() {
       case 'account':
         return <Account />;
       default:
-        return <Chatbot />;
+        return <Chatbot setActiveTab={setActiveTab} />;
     }
   };
 

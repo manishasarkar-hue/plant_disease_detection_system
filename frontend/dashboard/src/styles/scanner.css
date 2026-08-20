@@ -1,0 +1,882 @@
+/* Plant Disease Scanner Styling */
+
+.scanner-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  padding: 1.5rem 2.5rem 3rem 2.5rem;
+  background-color: var(--bg-dark);
+  gap: 1.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scanner-hero {
+  background: linear-gradient(135deg, rgba(136, 144, 99, 0.15) 0%, rgba(53, 64, 36, 0.12) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: 1.25rem;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.scanner-hero-info h2 {
+  font-size: 1.5rem;
+  color: var(--kombu-green);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.scanner-hero-info p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.scanner-mode-tabs {
+  display: flex;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 0.35rem;
+  border-radius: 0.85rem;
+  border: 1px solid var(--border-color);
+}
+
+.scanner-mode-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 0.6rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.scanner-mode-btn:hover {
+  color: var(--kombu-green);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.scanner-mode-btn.active {
+  background: var(--kombu-green);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(53, 64, 36, 0.25);
+}
+
+/* Scanner Main Grid */
+.scanner-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 1.5rem;
+  min-height: 480px;
+}
+
+@media (max-width: 1024px) {
+  .scanner-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Left Card: Viewfinder / Upload */
+.scanner-capture-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  backdrop-filter: blur(10px);
+}
+
+/* Camera Live Viewfinder */
+.camera-viewfinder-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #111;
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.camera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Futuristic HUD Overlays */
+.camera-hud-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.hud-corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: #4ade80;
+}
+
+.hud-tl {
+  top: 16px;
+  left: 16px;
+  border-top: 3px solid #4ade80;
+  border-left: 3px solid #4ade80;
+  border-top-left-radius: 4px;
+}
+
+.hud-tr {
+  top: 16px;
+  right: 16px;
+  border-top: 3px solid #4ade80;
+  border-right: 3px solid #4ade80;
+  border-top-right-radius: 4px;
+}
+
+.hud-bl {
+  bottom: 16px;
+  left: 16px;
+  border-bottom: 3px solid #4ade80;
+  border-left: 3px solid #4ade80;
+  border-bottom-left-radius: 4px;
+}
+
+.hud-br {
+  bottom: 16px;
+  right: 16px;
+  border-bottom: 3px solid #4ade80;
+  border-right: 3px solid #4ade80;
+  border-bottom-right-radius: 4px;
+}
+
+.hud-target-reticle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: 160px;
+  border: 1.5px dashed rgba(74, 222, 128, 0.6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: reticlePulse 3s infinite ease-in-out;
+}
+
+.hud-target-center {
+  width: 8px;
+  height: 8px;
+  background: #4ade80;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #4ade80;
+}
+
+.hud-status-badge {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #4ade80;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(74, 222, 128, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  background: #ef4444;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes reticlePulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+  50% { transform: translate(-50%, -50%) scale(1.08); opacity: 1; border-color: #22c55e; }
+}
+
+.camera-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding-top: 0.5rem;
+}
+
+.btn-snap-photo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #fff;
+  border: 4px solid var(--kombu-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-snap-photo:hover {
+  transform: scale(1.08);
+  border-color: var(--moss-green);
+}
+
+.btn-snap-photo:active {
+  transform: scale(0.95);
+  background: var(--tan);
+}
+
+.btn-snap-photo-inner {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--kombu-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.camera-aux-btn {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--border-color);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--kombu-green);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.camera-aux-btn:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  border-color: var(--moss-green);
+}
+
+/* Upload Dropzone */
+.scanner-dropzone {
+  border: 2px dashed var(--border-color);
+  border-radius: 1rem;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  background: rgba(255, 255, 255, 0.25);
+  gap: 0.85rem;
+  aspect-ratio: 4 / 3;
+}
+
+.scanner-dropzone:hover,
+.scanner-dropzone.drag-active {
+  border-color: var(--moss-green);
+  background: rgba(136, 144, 99, 0.15);
+  transform: translateY(-2px);
+}
+
+.dropzone-icon-wrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--tan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--kombu-green);
+  box-shadow: 0 4px 12px rgba(53, 64, 36, 0.1);
+}
+
+.dropzone-text h4 {
+  font-size: 1.1rem;
+  color: var(--kombu-green);
+  margin-bottom: 0.25rem;
+}
+
+.dropzone-text p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.dropzone-browse-btn {
+  background: var(--kombu-green);
+  color: #fff;
+  border: none;
+  padding: 0.55rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.dropzone-browse-btn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+/* Image Preview & Active Scanning View */
+.image-preview-panel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-preview-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preview-actions-overlay {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.preview-pill-btn {
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+}
+
+.preview-pill-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Laser Scan Animation */
+.laser-scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #4ade80;
+  box-shadow: 0 0 15px 4px #4ade80, 0 0 30px 8px rgba(74, 222, 128, 0.5);
+  z-index: 5;
+  animation: laserSweep 2.2s infinite ease-in-out;
+}
+
+.laser-grid-mesh {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(rgba(74, 222, 128, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74, 222, 128, 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+@keyframes laserSweep {
+  0% { top: 0%; opacity: 0.8; }
+  50% { top: 98%; opacity: 1; }
+  100% { top: 0%; opacity: 0.8; }
+}
+
+/* Sample Images Section */
+.scanner-samples-wrap {
+  margin-top: 0.5rem;
+}
+
+.scanner-samples-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.samples-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+}
+
+@media (max-width: 640px) {
+  .samples-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.sample-leaf-card {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 0.4rem;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.sample-leaf-card:hover {
+  border-color: var(--moss-green);
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.sample-leaf-img {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+.sample-leaf-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--kombu-green);
+  line-height: 1.2;
+}
+
+.sample-leaf-status {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+/* Right Panel: Diagnosis & Diagnostic Steps */
+.scanner-results-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  backdrop-filter: blur(10px);
+}
+
+/* Empty State / Standby Mode */
+.scanner-standby-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  gap: 1rem;
+  color: var(--text-muted);
+}
+
+.standby-icon-box {
+  width: 80px;
+  height: 80px;
+  border-radius: 1.25rem;
+  background: rgba(136, 144, 99, 0.2);
+  border: 1px solid var(--moss-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--kombu-green);
+  animation: floatIcon 4s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.standby-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 320px;
+  margin-top: 0.5rem;
+  text-align: left;
+}
+
+.standby-step-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--kombu-green);
+  background: rgba(255, 255, 255, 0.4);
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+}
+
+.step-number {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--kombu-green);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Scanning Progress State */
+.scanner-analyzing-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  gap: 1.5rem;
+}
+
+.analyzing-radar {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 2px solid var(--moss-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.analyzing-radar-sweep {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border-top: 3px solid var(--kombu-green);
+  border-right: 3px solid transparent;
+  animation: radarSpin 1.2s linear infinite;
+}
+
+@keyframes radarSpin {
+  100% { transform: rotate(360deg); }
+}
+
+.analyzing-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 320px;
+}
+
+.analyzing-step-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+
+.analyzing-step-badge.active {
+  background: rgba(136, 144, 99, 0.25);
+  border-color: var(--moss-green);
+  color: var(--kombu-green);
+  font-weight: 600;
+}
+
+.analyzing-step-badge.done {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: #22c55e;
+  color: #166534;
+}
+
+/* Diagnosis Active Card */
+.diagnosis-result-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  animation: fadeIn 0.4s ease;
+}
+
+.diagnosis-header-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.diagnosis-title-wrap h3 {
+  font-size: 1.35rem;
+  color: var(--kombu-green);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.diagnosis-scientific-name {
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.diagnosis-severity-tag {
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.severity-healthy {
+  background: rgba(34, 197, 94, 0.2);
+  color: #166534;
+  border: 1px solid #22c55e;
+}
+
+.severity-mild {
+  background: rgba(234, 179, 8, 0.2);
+  color: #854d0e;
+  border: 1px solid #eab308;
+}
+
+.severity-moderate {
+  background: rgba(249, 115, 22, 0.2);
+  color: #9a3412;
+  border: 1px solid #f97316;
+}
+
+.severity-severe {
+  background: rgba(239, 68, 68, 0.2);
+  color: #991b1b;
+  border: 1px solid #ef4444;
+}
+
+/* Confidence Meter */
+.confidence-meter-box {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.confidence-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--kombu-green);
+}
+
+.confidence-bar-track {
+  height: 8px;
+  background: rgba(76, 61, 25, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.confidence-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--moss-green) 0%, var(--kombu-green) 100%);
+  transition: width 1s ease-out;
+}
+
+/* Symptoms Box */
+.diagnosis-section-box {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 0.85rem 1rem;
+}
+
+.diagnosis-section-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--kombu-green);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.symptoms-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  list-style: none;
+}
+
+.symptoms-list li {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  line-height: 1.4;
+}
+
+/* Treatment Tabs */
+.treatment-tabs-bar {
+  display: flex;
+  gap: 0.4rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.4rem;
+}
+
+.treatment-tab-btn {
+  background: transparent;
+  border: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+}
+
+.treatment-tab-btn.active {
+  background: var(--tan);
+  color: var(--kombu-green);
+}
+
+.treatment-body {
+  padding-top: 0.5rem;
+}
+
+.treatment-step-item {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  line-height: 1.4;
+}
+
+/* Actions Footer */
+.diagnosis-actions-footer {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.btn-diagnose-chat {
+  flex: 1;
+  background: var(--kombu-green);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 0.65rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn-diagnose-chat:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(53, 64, 36, 0.25);
+}
+
+.btn-diagnose-secondary {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border-color);
+  color: var(--kombu-green);
+  padding: 0.75rem 1rem;
+  border-radius: 0.65rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn-diagnose-secondary:hover {
+  background: #fff;
+  border-color: var(--moss-green);
+  transform: translateY(-1px);
+}
