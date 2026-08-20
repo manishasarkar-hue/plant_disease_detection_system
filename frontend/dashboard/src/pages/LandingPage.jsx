@@ -107,7 +107,14 @@ const LandingPage = () => {
           <a href="#how-it-works" onClick={(e) => handleNavClick(e, '#how-it-works')}>How it Works</a>
           <a href="#about" onClick={(e) => handleNavClick(e, '#about')}>About Us</a>
         </div>
-        <button className="landing-btn-primary" onClick={() => navigate('/dashboard')}>Try Now</button>
+        <div className="landing-nav-actions" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <button className="landing-btn-secondary" style={{ padding: '0.5rem 1rem' }} onClick={() => navigate('/login')}>
+            Sign In
+          </button>
+          <button className="landing-btn-primary" onClick={() => navigate('/dashboard')}>
+            Try Free Scan
+          </button>
+        </div>
       </nav>
 
       {/* Hero Section */}
