@@ -99,7 +99,7 @@ const LandingPage = () => {
       {/* Navbar */}
       <nav className="landing-navbar" ref={navbarRef}>
         <div className="landing-logo">
-          <img src="/assets/logo.png" alt="Logo" onError={(e) => { e.target.style.display = 'none'; }} />
+          <img src="/assets/logo.svg" alt="PlantCare AI Logo" onError={(e) => { e.target.src = '/assets/logo.png'; }} />
           <span>PlantCare AI</span>
         </div>
         <div className="landing-nav-links">
@@ -225,7 +225,7 @@ const LandingPage = () => {
       <footer className="landing-footer">
         <div className="footer-content">
           <div className="landing-logo">
-            <img src="/assets/logo.png" alt="Logo" onError={(e) => { e.target.style.display = 'none'; }} />
+            <img src="/assets/logo.svg" alt="PlantCare AI Logo" onError={(e) => { e.target.src = '/assets/logo.png'; }} />
             <span>PlantCare AI</span>
           </div>
           <p>&copy; 2026 PlantCare AI. All rights reserved.</p>
