@@ -1,13 +1,14 @@
 :root {
-    --cafe-noir: #4C3D19;
-    --kombu-green: #354024;
-    --moss-green: #889063;
-    --tan: #CFBB99;
-    --bone: #E5D7C4;
+    --cafe-noir: #0F172A;
+    --kombu-green: #0A5C36;
+    --moss-green: #10B981;
+    --tan: #E8F5E9;
+    --bone: #FFFFFF;
     
-    --bg-color: var(--bone);
-    --text-main: var(--kombu-green);
-    --text-muted: var(--cafe-noir);
+    --bg-color: #F8FAFC;
+    --text-main: #0F172A;
+    --text-muted: #64748B;
+    --border-color: #E2E8F0;
     
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -45,21 +46,21 @@ body {
     transform: translateX(-50%);
     width: min(92%, 1200px);
     z-index: 100;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.88);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 24px;
-    box-shadow: 0 8px 32px rgba(76, 61, 25, 0.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .navbar.scrolled {
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    box-shadow: 0 10px 40px rgba(76, 61, 25, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 0.75rem 2rem;
     width: min(95%, 1200px);
 }
@@ -132,16 +133,16 @@ button {
 
 .btn-primary {
     background-color: var(--moss-green);
-    color: var(--bone);
+    color: #FFFFFF;
     padding: 0.75rem 1.6rem;
     font-size: 1rem;
-    box-shadow: 0 4px 15px rgba(136, 144, 99, 0.3);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.28);
 }
 
 .btn-primary:hover {
     background-color: var(--kombu-green);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(53, 64, 36, 0.4);
+    box-shadow: 0 6px 20px rgba(10, 92, 54, 0.35);
 }
 
 .btn-secondary {
@@ -154,7 +155,7 @@ button {
 
 .btn-secondary:hover {
     background-color: var(--kombu-green);
-    color: var(--bone);
+    color: #FFFFFF;
     transform: translateY(-2px);
 }
 

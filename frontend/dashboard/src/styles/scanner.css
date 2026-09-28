@@ -12,7 +12,7 @@
 }
 
 .scanner-hero {
-  background: linear-gradient(135deg, rgba(136, 144, 99, 0.15) 0%, rgba(53, 64, 36, 0.12) 100%);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(10, 92, 54, 0.04) 100%);
   border: 1px solid var(--border-color);
   border-radius: 1.25rem;
   padding: 1.5rem 2rem;
@@ -21,7 +21,6 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  backdrop-filter: blur(10px);
 }
 
 .scanner-hero-info h2 {
@@ -41,10 +40,11 @@
 .scanner-mode-tabs {
   display: flex;
   gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.5);
+  background: #FFFFFF;
   padding: 0.35rem;
   border-radius: 0.85rem;
   border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .scanner-mode-btn {
@@ -740,7 +740,7 @@
 
 .confidence-bar-track {
   height: 8px;
-  background: rgba(76, 61, 25, 0.1);
+  background: #E2E8F0;
   border-radius: 999px;
   overflow: hidden;
 }

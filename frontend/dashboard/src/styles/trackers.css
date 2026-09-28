@@ -79,14 +79,14 @@
 }
 
 .tracker-menu-btn:hover {
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: #F1F5F9;
   color: var(--text-main);
 }
 
 .tracker-menu-btn.active {
   background-color: var(--tan);
   color: var(--primary-hover);
-  border-color: rgba(136, 144, 99, 0.3);
+  border-color: #A7F3D0;
   font-weight: 600;
 }
 
@@ -202,7 +202,9 @@
 .custom-icon { color: #8b5cf6; }
 
 .inner-card {
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: #F8FAFC;
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
   padding: 1.25rem 1.5rem;
 }
 
