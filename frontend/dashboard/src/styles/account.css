@@ -52,15 +52,15 @@
   }
 }
 
-/* Profile Banner Card */
+/* Profile Banner Card - Frosted Glass */
 .profile-banner-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.6) 100%);
-  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid var(--glass-border);
   border-radius: 1.25rem;
   padding: 1.75rem 2rem;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 20px rgba(53, 64, 36, 0.05);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
