@@ -1,19 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap');
 
 :root {
-  --cafe-noir: #0F172A;
-  --kombu-green: #0A5C36;
-  --moss-green: #10B981;
-  --tan: #E8F5E9;
-  --bone: #FFFFFF;
+  /* User Palette: White, Leaf, Moss, Grass, Forest */
+  --color-white: #FAF9F6;
+  --color-leaf: #ECF39E;
+  --color-moss: #90A955;
+  --color-grass: #40916C;
+  --color-forest: #31572C;
 
-  --bg-dark: #F8FAFC;
-  --bg-panel: #FFFFFF;
-  --primary: #10B981;
-  --primary-hover: #059669;
-  --text-main: #0F172A;
-  --text-muted: #64748B;
-  --border-color: #E2E8F0;
+  /* Semantic Token Mappings */
+  --cafe-noir: #31572C;       /* Forest */
+  --kombu-green: #31572C;     /* Forest */
+  --moss-green: #40916C;      /* Grass (Primary Action Green) */
+  --tan: #ECF39E;             /* Leaf */
+  --bone: #FAF9F6;            /* White */
+
+  /* Glassmorphism System Tokens */
+  --bg-dark: #FAF9F6;
+  --bg-panel: rgba(250, 249, 246, 0.82);
+  --bg-panel-solid: #FAF9F6;
+  --bg-glass-elevated: rgba(250, 249, 246, 0.92);
+  --bg-glass-subtle: rgba(236, 243, 158, 0.22);
+  --bg-glass-hover: rgba(255, 255, 255, 0.96);
+  --glass-border: rgba(144, 169, 85, 0.28);
+  --glass-border-subtle: rgba(144, 169, 85, 0.18);
+  --glass-border-highlight: rgba(250, 249, 246, 0.95);
+  --glass-shadow: 0 10px 30px -5px rgba(49, 87, 44, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+  --glass-shadow-lg: 0 20px 40px -10px rgba(49, 87, 44, 0.14), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
+  --glass-inner-glow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 1px 0 rgba(49, 87, 44, 0.03);
+  --glass-blur: blur(16px) saturate(180%);
+  --glass-blur-sm: blur(10px) saturate(160%);
+  --glass-blur-lg: blur(24px) saturate(200%);
+
+  --primary: #40916C;         /* Grass */
+  --primary-hover: #31572C;   /* Forest */
+  --accent-leaf: #ECF39E;     /* Leaf */
+  --accent-moss: #90A955;     /* Moss */
+  --text-main: #31572C;       /* Forest */
+  --text-muted: #597355;      /* Subdued Forest-Moss */
+  --border-color: rgba(144, 169, 85, 0.28);
   --sidebar-width: 260px;
 }
 
@@ -43,28 +68,40 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Outfit', sans-serif;
 }
 
+/* Ambient Glassmorphic Canvas Backdrop */
 .app-container {
   display: flex;
   height: 100vh;
   height: 100dvh;
   width: 100vw;
   overflow: hidden;
+  position: relative;
+  background-color: var(--color-white);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(64, 145, 108, 0.14) 0px, transparent 48%),
+    radial-gradient(at 100% 0%, rgba(236, 243, 158, 0.35) 0px, transparent 45%),
+    radial-gradient(at 100% 100%, rgba(64, 145, 108, 0.12) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(144, 169, 85, 0.18) 0px, transparent 45%),
+    radial-gradient(at 50% 50%, rgba(236, 243, 158, 0.2) 0px, transparent 65%);
+  background-attachment: fixed;
 }
 
-/* Sidebar Styling */
+/* Sidebar Styling - Frosted Glass Column */
 .sidebar {
   width: var(--sidebar-width);
-  background-color: var(--bg-panel);
-  border-right: 1px solid var(--border-color);
+  background: rgba(250, 249, 246, 0.75);
+  border-right: 1px solid var(--glass-border);
   display: flex;
   flex-direction: column;
   padding: 1.5rem 1rem;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  backdrop-filter: var(--glass-blur-lg);
+  -webkit-backdrop-filter: var(--glass-blur-lg);
+  box-shadow: 4px 0 25px rgba(49, 87, 44, 0.03), var(--glass-inner-glow);
   flex-shrink: 0;
   overflow-y: auto;
   overflow-x: hidden;
+  z-index: 20;
 }
 
 .sidebar-header {
@@ -78,8 +115,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidebar-header h2 {
   font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--text-main);
+  font-weight: 700;
+  color: var(--kombu-green);
   white-space: nowrap;
 }
 
@@ -88,6 +125,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 32px;
   object-fit: contain;
   flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(64, 145, 108, 0.3));
 }
 
 .sidebar-nav {
@@ -102,69 +140,82 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   color: var(--text-muted);
   text-decoration: none;
   background: transparent;
-  border: none;
+  border: 1px solid transparent;
   width: 100%;
   text-align: left;
   font-size: 0.95rem;
   font-family: 'Inter', sans-serif;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   font-weight: 500;
   cursor: pointer;
   white-space: nowrap;
 }
 
 .nav-item:hover {
-  background-color: #F1F5F9;
+  background: rgba(250, 249, 246, 0.85);
+  border-color: rgba(144, 169, 85, 0.35);
   color: var(--text-main);
+  box-shadow: 0 4px 14px rgba(49, 87, 44, 0.04);
+  transform: translateX(3px);
 }
 
 .nav-item.active {
-  background-color: var(--tan);
-  color: #065F46;
+  background: rgba(236, 243, 158, 0.35);
+  border-color: rgba(64, 145, 108, 0.35);
+  color: var(--color-forest);
   font-weight: 600;
+  box-shadow: 0 4px 14px rgba(64, 145, 108, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.9);
 }
 
 .sidebar-user-card {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.65rem 0.75rem;
-  border-radius: 0.75rem;
-  background-color: #F8FAFC;
-  border: 1px solid var(--border-color);
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.85rem;
+  background: rgba(250, 249, 246, 0.7);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  box-shadow: 0 4px 14px rgba(49, 87, 44, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.9);
   cursor: pointer;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   flex-shrink: 0;
 }
 
 .sidebar-user-card:hover {
-  background-color: #F1F5F9;
+  background: rgba(250, 249, 246, 0.95);
   border-color: var(--primary);
+  box-shadow: 0 6px 18px rgba(64, 145, 108, 0.15);
+  transform: translateY(-1px);
 }
 
 .sidebar-user-card.active {
-  background-color: var(--tan);
+  background: rgba(236, 243, 158, 0.35);
   border-color: var(--primary);
+  box-shadow: 0 6px 18px rgba(64, 145, 108, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.9);
 }
 
 .sidebar-user-avatar {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--tan);
-  border: 1px solid var(--border-color);
+  background: var(--color-leaf);
+  color: var(--color-forest);
+  border: 1px solid rgba(64, 145, 108, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   font-size: 1.1rem;
   flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(49, 87, 44, 0.08);
 }
 
 .sidebar-user-avatar img {
@@ -220,7 +271,7 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   min-width: 0;
   min-height: 0;
-  background-color: var(--bg-dark);
+  background: transparent;
 }
 
 .tab-content {
@@ -234,7 +285,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .tab-content.active {
   display: flex;
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes fadeIn {
@@ -244,11 +295,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .content-header {
   padding: 1.5rem 2.5rem;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--glass-border);
   flex-shrink: 0;
-  background-color: var(--bg-panel);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  z-index: 10;
 }
 
 .content-header h1 {
@@ -270,7 +323,7 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   overflow: hidden;
   min-height: 0;
-  background-color: var(--bg-dark);
+  background: transparent;
 }
 
 .chat-messages {
@@ -280,7 +333,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  background-color: var(--bg-dark);
+  background: transparent;
   min-height: 0;
   -webkit-overflow-scrolling: touch;
 }
@@ -305,62 +358,71 @@ h1, h2, h3, h4, h5, h6 {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background-color: #F1F5F9;
+  background-color: rgba(250, 249, 246, 0.85);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 2px 8px rgba(49, 87, 44, 0.04);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
   overflow: hidden;
 }
 
 .bot-message .avatar {
-  background-color: #E8F5E9;
-  color: #065F46;
-  border-color: #A7F3D0;
+  background-color: var(--color-leaf);
+  color: var(--color-forest);
+  border-color: rgba(64, 145, 108, 0.4);
 }
 
 .message-content {
-  background-color: var(--bg-panel);
-  padding: 0.85rem 1.15rem;
-  border-radius: 1rem;
-  line-height: 1.5;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  background: rgba(250, 249, 246, 0.85);
+  padding: 0.95rem 1.25rem;
+  border-radius: 1.15rem;
+  line-height: 1.55;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   font-size: 0.95rem;
   word-break: break-word;
   overflow-wrap: break-word;
+  transition: all 0.2s ease;
 }
 
 .bot-message .message-content {
-  border-top-left-radius: 0.25rem;
+  border-top-left-radius: 0.35rem;
 }
 
 .user-message .message-content {
-  background-color: var(--primary-hover);
-  color: #FFFFFF;
-  border-color: var(--primary-hover);
-  border-top-right-radius: 0.25rem;
+  background: linear-gradient(135deg, var(--color-grass) 0%, var(--color-forest) 100%);
+  color: var(--color-white);
+  border: 1px solid rgba(250, 249, 246, 0.4);
+  box-shadow: 0 8px 25px rgba(49, 87, 44, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-top-right-radius: 0.35rem;
 }
 
 .message-content img {
   max-width: 100%;
   height: auto;
-  border-radius: 0.5rem;
+  border-radius: 0.65rem;
   margin-bottom: 0.5rem;
   display: block;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
 /* Chat Input Area */
 .chat-input-area {
-  padding: 1rem 2.5rem 1.25rem;
-  background-color: var(--bg-panel);
-  border-top: 1px solid var(--border-color);
+  padding: 1.25rem 2.5rem 1.5rem;
+  background: rgba(255, 255, 255, 0.58);
+  border-top: 1px solid var(--glass-border);
   flex-shrink: 0;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: var(--glass-blur-lg);
+  -webkit-backdrop-filter: var(--glass-blur-lg);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.02);
 }
 
 .image-preview-container {
@@ -368,15 +430,16 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block;
   margin-bottom: 0.75rem;
   padding: 0.5rem;
-  background-color: rgba(0,0,0,0.06);
-  border-radius: 0.5rem;
-  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 0.75rem;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 .image-preview-container img {
   max-height: 90px;
   max-width: 100%;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   display: block;
 }
 
@@ -393,18 +456,28 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);
 }
 
 .input-wrapper {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: #FFFFFF;
-  padding: 0.4rem 0.6rem;
-  border-radius: 0.75rem;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  background: rgba(255, 255, 255, 0.85);
+  padding: 0.45rem 0.75rem;
+  border-radius: 1rem;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03), inset 0 1px 2px rgba(255, 255, 255, 0.95);
   width: 100%;
+  transition: all 0.25s ease;
+}
+
+.input-wrapper:focus-within {
+  background: #FAF9F6;
+  border-color: var(--primary);
+  box-shadow: 0 6px 24px rgba(64, 145, 108, 0.16), 0 0 0 3px rgba(64, 145, 108, 0.12);
 }
 
 #chat-input {
@@ -434,20 +507,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .icon-btn:hover {
-  background-color: #F1F5F9;
+  background: rgba(250, 249, 246, 0.9);
   color: var(--text-main);
 }
 
 .primary-btn {
   background-color: var(--primary);
-  color: var(--bone);
+  color: var(--color-white);
   border: none;
   padding: 0.65rem 1.25rem;
-  border-radius: 0.5rem;
-  font-weight: 500;
+  border-radius: 0.65rem;
+  font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 4px 14px rgba(64, 145, 108, 0.28);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -457,6 +531,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .primary-btn:hover {
   background-color: var(--primary-hover);
+  box-shadow: 0 6px 18px rgba(49, 87, 44, 0.35);
+  transform: translateY(-1px);
 }
 
 .primary-btn:active {
@@ -482,16 +558,17 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.5rem;
 }
 
-/* Account Card */
+/* Account Card - Frosted Glass Card */
 .account-card {
   margin: 2rem 2.5rem;
-  background-color: var(--bg-panel);
-  border: 1px solid var(--border-color);
-  border-radius: 1rem;
-  padding: 2rem;
-  max-width: 500px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: var(--bg-panel);
+  border: 1px solid var(--glass-border);
+  border-radius: 1.25rem;
+  padding: 2.25rem;
+  max-width: 520px;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow-lg), var(--glass-inner-glow);
 }
 
 .profile-header {
@@ -503,14 +580,15 @@ h1, h2, h3, h4, h5, h6 {
 .profile-avatar {
   width: 72px;
   height: 72px;
-  background-color: var(--tan);
-  color: var(--kombu-green);
+  background-color: var(--color-leaf);
+  color: var(--color-forest);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(64, 145, 108, 0.35);
+  box-shadow: 0 4px 14px rgba(64, 145, 108, 0.18);
 }
 
 .profile-info h3 {
@@ -547,7 +625,7 @@ h1, h2, h3, h4, h5, h6 {
   40% { transform: scale(1); }
 }
 
-/* Weather Widget */
+/* Weather Widget - Floating Glass Element */
 .sidebar-weather-container {
   margin-bottom: 1rem;
   padding: 0 0.25rem;
@@ -559,13 +637,72 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.75rem;
-  padding: 0.85rem;
-  background-color: rgba(255, 255, 255, 0.4);
-  border: 1px solid var(--border-color);
-  border-radius: 0.75rem;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  padding: 0.95rem;
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid var(--glass-border);
+  border-radius: 0.85rem;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
   width: 100%;
+  transition: all 0.25s ease;
+}
+
+.weather-widget:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: var(--glass-shadow-lg), var(--glass-inner-glow);
+}
+
+/* Glassmorphism Reusable Component Utilities */
+.glass-panel {
+  background: var(--bg-panel);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
+  border-radius: 1.25rem;
+}
+
+.glass-card {
+  background: var(--bg-panel);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
+  border-radius: 1rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.glass-card:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--glass-border-highlight);
+  transform: translateY(-2px);
+  box-shadow: var(--glass-shadow-lg), var(--glass-inner-glow);
+}
+
+.glass-pill {
+  background: var(--bg-glass-subtle);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  border: 1px solid var(--glass-border);
+  border-radius: 9999px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.glass-input {
+  background: rgba(250, 249, 246, 0.75) !important;
+  backdrop-filter: var(--glass-blur-sm) !important;
+  -webkit-backdrop-filter: var(--glass-blur-sm) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: inset 0 1px 2px rgba(49, 87, 44, 0.03) !important;
+  transition: all 0.2s ease !important;
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(64, 145, 108, 0.16), inset 0 1px 2px rgba(0, 0, 0, 0.02) !important;
 }
 
 .weather-widget.loading, .weather-widget.error {
@@ -611,7 +748,7 @@ h1, h2, h3, h4, h5, h6 {
 .weather-suitability {
   width: 100%;
   padding-left: 0.5rem;
-  border-left: 3px solid var(--moss-green);
+  border-left: 3px solid var(--color-grass);
   border-radius: 2px;
 }
 

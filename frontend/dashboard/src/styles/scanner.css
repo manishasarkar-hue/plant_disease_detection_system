@@ -12,8 +12,8 @@
 }
 
 .scanner-hero {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(10, 92, 54, 0.04) 100%);
-  border: 1px solid var(--border-color);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(232, 245, 233, 0.6) 100%);
+  border: 1px solid var(--glass-border);
   border-radius: 1.25rem;
   padding: 1.5rem 2rem;
   display: flex;
@@ -21,6 +21,9 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
 }
 
 .scanner-hero-info h2 {
@@ -40,11 +43,13 @@
 .scanner-mode-tabs {
   display: flex;
   gap: 0.5rem;
-  background: #FFFFFF;
+  background: rgba(255, 255, 255, 0.65);
   padding: 0.35rem;
   border-radius: 0.85rem;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.9);
 }
 
 .scanner-mode-btn {
@@ -65,13 +70,13 @@
 
 .scanner-mode-btn:hover {
   color: var(--kombu-green);
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .scanner-mode-btn.active {
   background: var(--kombu-green);
   color: #fff;
-  box-shadow: 0 2px 8px rgba(53, 64, 36, 0.25);
+  box-shadow: 0 4px 12px rgba(10, 92, 54, 0.25);
 }
 
 /* Scanner Main Grid */
@@ -88,16 +93,18 @@
   }
 }
 
-/* Left Card: Viewfinder / Upload */
+/* Left Card: Viewfinder / Upload - Frosted Glass */
 .scanner-capture-panel {
-  background: var(--bg-panel);
-  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--glass-border);
   border-radius: 1.25rem;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
 }
 
 /* Camera Live Viewfinder */
@@ -507,16 +514,18 @@
   color: var(--text-muted);
 }
 
-/* Right Panel: Diagnosis & Diagnostic Steps */
+/* Right Panel: Diagnosis & Diagnostic Steps - Frosted Glass */
 .scanner-results-panel {
-  background: var(--bg-panel);
-  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--glass-border);
   border-radius: 1.25rem;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
 }
 
 /* Empty State / Standby Mode */

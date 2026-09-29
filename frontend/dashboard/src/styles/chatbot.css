@@ -4,22 +4,22 @@
    ========================================================================== */
 
 :root {
-  --pg-bg-base: #0b0f0d;
-  --pg-bg-panel: #111815;
-  --pg-bg-card: #15201b;
-  --pg-bg-card-hover: #1c2b24;
-  --pg-border: #22342b;
-  --pg-border-subtle: rgba(74, 222, 128, 0.12);
-  --pg-border-active: #10b981;
-  --pg-accent-primary: #10b981;
-  --pg-accent-hover: #059669;
-  --pg-accent-glow: rgba(16, 185, 129, 0.18);
-  --pg-accent-muted: #1b382b;
-  --pg-text-primary: #f0fdf4;
-  --pg-text-body: #d1d5db;
-  --pg-text-muted: #8b9d93;
-  --pg-user-bubble: #163e2c;
-  --pg-bot-bubble: #131c18;
+  --pg-bg-base: #1b2e1a;
+  --pg-bg-panel: #243c22;
+  --pg-bg-card: #2c4a2a;
+  --pg-bg-card-hover: #375b33;
+  --pg-border: rgba(144, 169, 85, 0.35);
+  --pg-border-subtle: rgba(236, 243, 158, 0.18);
+  --pg-border-active: #40916C;
+  --pg-accent-primary: #40916C;
+  --pg-accent-hover: #31572C;
+  --pg-accent-glow: rgba(64, 145, 108, 0.25);
+  --pg-accent-muted: #2d4828;
+  --pg-text-primary: #FAF9F6;
+  --pg-text-body: #FAF9F6;
+  --pg-text-muted: #ECF39E;
+  --pg-user-bubble: #31572C;
+  --pg-bot-bubble: #253e24;
 }
 
 /* Chat Page Wrapper */
@@ -30,8 +30,8 @@
   width: 100%;
   background: var(--pg-bg-base);
   background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16, 185, 129, 0.08), transparent),
-    radial-gradient(circle 300px at 100% 100%, rgba(5, 150, 105, 0.04), transparent);
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(64, 145, 108, 0.15), transparent),
+    radial-gradient(circle 300px at 100% 100%, rgba(144, 169, 85, 0.1), transparent);
   color: var(--pg-text-primary);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow: hidden;
