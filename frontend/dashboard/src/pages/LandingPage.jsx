@@ -86,7 +86,7 @@ const LandingPage = () => {
     e.preventDefault();
     const targetElement = document.querySelector(targetId);
     if (targetElement) {
-      const topOffset = targetElement.getBoundingClientRect().top + window.scrollY - 80;
+      const topOffset = targetElement.getBoundingClientRect().top + window.scrollY - 105;
       window.scrollTo({
         top: topOffset,
         behavior: 'smooth'
@@ -107,11 +107,11 @@ const LandingPage = () => {
           <a href="#how-it-works" onClick={(e) => handleNavClick(e, '#how-it-works')}>How it Works</a>
           <a href="#about" onClick={(e) => handleNavClick(e, '#about')}>About Us</a>
         </div>
-        <div className="landing-nav-actions" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <button className="landing-btn-secondary" style={{ padding: '0.5rem 1rem' }} onClick={() => navigate('/login')}>
+        <div className="landing-nav-actions" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <button className="landing-btn-secondary landing-nav-btn" onClick={() => navigate('/login')}>
             Sign In
           </button>
-          <button className="landing-btn-primary" onClick={() => navigate('/dashboard')}>
+          <button className="landing-btn-primary landing-nav-btn" onClick={() => navigate('/dashboard')}>
             Try Free Scan
           </button>
         </div>
