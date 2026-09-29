@@ -175,8 +175,13 @@
 
 .landing-page .hero-content {
   flex: 1;
-  max-width: 560px;
+  max-width: 580px;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .landing-page .hero h1 {
@@ -187,6 +192,7 @@
   color: var(--kombu-green);
   margin-bottom: 1.25rem;
   letter-spacing: -0.02em;
+  text-align: center;
 }
 
 .landing-page .highlight {
@@ -201,12 +207,17 @@
   margin-bottom: 2rem;
   max-width: 520px;
   line-height: 1.6;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .landing-page .hero-buttons {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Enlarged Right-Aligned Scanner Container */

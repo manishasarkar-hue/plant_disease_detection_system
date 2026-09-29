@@ -201,8 +201,13 @@ button {
 
 .hero-content {
     flex: 1;
-    max-width: 560px;
+    max-width: 580px;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .hero h1 {
@@ -213,6 +218,7 @@ button {
     color: var(--kombu-green);
     margin-bottom: 1.25rem;
     letter-spacing: -0.02em;
+    text-align: center;
 }
 
 .highlight {
@@ -227,12 +233,17 @@ button {
     margin-bottom: 2rem;
     max-width: 520px;
     line-height: 1.6;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .hero-buttons {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .hero-image {
