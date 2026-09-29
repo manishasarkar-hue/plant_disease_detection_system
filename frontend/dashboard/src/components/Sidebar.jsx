@@ -46,7 +46,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
   return (
     <aside className="sidebar">
       <div className="sidebar-header" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-        <img src="/assets/logo.png" alt="Logo" className="logo-icon" onError={(e) => e.target.src='https://via.placeholder.com/40'} />
+        <img src="/assets/logo.svg" alt="PlantCare AI Logo" className="logo-icon" onError={(e) => e.target.src='/assets/logo.png'} />
         <h2>PlantCare AI</h2>
       </div>
       
