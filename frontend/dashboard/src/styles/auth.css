@@ -4,11 +4,11 @@
   min-height: 100vh;
   min-height: 100dvh;
   width: 100vw;
-  background-color: #F8FAFC;
+  background-color: var(--color-white);
   background-image: 
-    radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.16) 0%, transparent 45%),
-    radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.12) 0%, transparent 45%),
-    radial-gradient(circle at 50% 50%, rgba(232, 245, 233, 0.5) 0%, transparent 60%);
+    radial-gradient(circle at 10% 20%, rgba(64, 145, 108, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(236, 243, 158, 0.35) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(144, 169, 85, 0.18) 0%, transparent 60%);
   background-attachment: fixed;
   display: flex;
   flex-direction: column;
@@ -43,7 +43,7 @@
   width: 34px;
   height: 34px;
   object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(16, 185, 129, 0.25));
+  filter: drop-shadow(0 2px 4px rgba(64, 145, 108, 0.3));
 }
 
 .auth-brand-title {
@@ -63,17 +63,17 @@
   font-weight: 600;
   padding: 0.5rem 1rem;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(250, 249, 246, 0.85);
   border: 1px solid var(--glass-border);
   backdrop-filter: var(--glass-blur-sm);
   -webkit-backdrop-filter: var(--glass-blur-sm);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 8px rgba(49, 87, 44, 0.04);
   transition: all 0.2s ease;
 }
 
 .auth-back-link:hover {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(250, 249, 246, 0.98);
+  border-color: rgba(64, 145, 108, 0.4);
   transform: translateX(-2px);
 }
 
@@ -81,13 +81,13 @@
 .auth-card {
   width: 100%;
   max-width: 460px;
-  background: rgba(255, 255, 255, 0.74);
+  background: rgba(250, 249, 246, 0.88);
   border: 1px solid var(--glass-border);
   border-radius: 1.5rem;
   padding: 2.5rem 2.25rem;
   backdrop-filter: var(--glass-blur-lg);
   -webkit-backdrop-filter: var(--glass-blur-lg);
-  box-shadow: 0 20px 50px -10px rgba(10, 92, 54, 0.1), 0 8px 20px -5px rgba(0, 0, 0, 0.04), inset 0 1px 2px rgba(255, 255, 255, 0.95);
+  box-shadow: 0 20px 50px -10px rgba(49, 87, 44, 0.12), 0 8px 20px -5px rgba(0, 0, 0, 0.04), inset 0 1px 2px rgba(255, 255, 255, 0.95);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -105,7 +105,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--moss-green), rgba(255, 255, 255, 0.8), var(--kombu-green));
+  background: linear-gradient(90deg, #40916C, #ECF39E, #31572C);
 }
 
 .auth-header {
