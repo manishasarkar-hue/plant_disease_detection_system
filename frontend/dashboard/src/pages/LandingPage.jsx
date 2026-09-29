@@ -132,9 +132,26 @@ const LandingPage = () => {
           </div>
         </div>
         <div className="hero-image">
-          <div className="image-wrapper">
+          <div className="image-wrapper hero-scanner-card">
             <img src="/assets/diseased.png" alt="Diseased plant leaf" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=800&q=80'; }} />
             <div className="scan-overlay"></div>
+            
+            {/* High-Tech HUD Reticle Corners */}
+            <div className="hero-hud-corners">
+              <span className="hero-hud-tl"></span>
+              <span className="hero-hud-tr"></span>
+              <span className="hero-hud-bl"></span>
+              <span className="hero-hud-br"></span>
+            </div>
+
+            {/* Live Floating Glass Status Badge */}
+            <div className="hero-scanner-badge">
+              <div className="badge-pulse"></div>
+              <div className="badge-text">
+                <span className="badge-title">AI Scanner Active</span>
+                <span className="badge-subtitle">Real-time Pathology Diagnostics</span>
+              </div>
+            </div>
           </div>
         </div>
       </header>
