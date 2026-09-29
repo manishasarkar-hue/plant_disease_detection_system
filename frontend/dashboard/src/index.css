@@ -260,7 +260,7 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   min-width: 0;
   min-height: 0;
-  background-color: var(--bg-dark);
+  background: transparent;
 }
 
 .tab-content {
@@ -274,7 +274,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .tab-content.active {
   display: flex;
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes fadeIn {
@@ -284,11 +284,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .content-header {
   padding: 1.5rem 2.5rem;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--glass-border);
   flex-shrink: 0;
-  background-color: var(--bg-panel);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  z-index: 10;
 }
 
 .content-header h1 {
@@ -310,7 +312,7 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   overflow: hidden;
   min-height: 0;
-  background-color: var(--bg-dark);
+  background: transparent;
 }
 
 .chat-messages {
@@ -320,7 +322,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  background-color: var(--bg-dark);
+  background: transparent;
   min-height: 0;
   -webkit-overflow-scrolling: touch;
 }
@@ -345,62 +347,71 @@ h1, h2, h3, h4, h5, h6 {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background-color: #F1F5F9;
+  background-color: rgba(255, 255, 255, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
   overflow: hidden;
 }
 
 .bot-message .avatar {
-  background-color: #E8F5E9;
+  background-color: rgba(232, 245, 233, 0.85);
   color: #065F46;
-  border-color: #A7F3D0;
+  border-color: rgba(16, 185, 129, 0.35);
 }
 
 .message-content {
-  background-color: var(--bg-panel);
-  padding: 0.85rem 1.15rem;
-  border-radius: 1rem;
-  line-height: 1.5;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0.78);
+  padding: 0.95rem 1.25rem;
+  border-radius: 1.15rem;
+  line-height: 1.55;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   font-size: 0.95rem;
   word-break: break-word;
   overflow-wrap: break-word;
+  transition: all 0.2s ease;
 }
 
 .bot-message .message-content {
-  border-top-left-radius: 0.25rem;
+  border-top-left-radius: 0.35rem;
 }
 
 .user-message .message-content {
-  background-color: var(--primary-hover);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.92) 0%, rgba(5, 150, 105, 0.95) 100%);
   color: #FFFFFF;
-  border-color: var(--primary-hover);
-  border-top-right-radius: 0.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-top-right-radius: 0.35rem;
 }
 
 .message-content img {
   max-width: 100%;
   height: auto;
-  border-radius: 0.5rem;
+  border-radius: 0.65rem;
   margin-bottom: 0.5rem;
   display: block;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
 /* Chat Input Area */
 .chat-input-area {
-  padding: 1rem 2.5rem 1.25rem;
-  background-color: var(--bg-panel);
-  border-top: 1px solid var(--border-color);
+  padding: 1.25rem 2.5rem 1.5rem;
+  background: rgba(255, 255, 255, 0.58);
+  border-top: 1px solid var(--glass-border);
   flex-shrink: 0;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: var(--glass-blur-lg);
+  -webkit-backdrop-filter: var(--glass-blur-lg);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.02);
 }
 
 .image-preview-container {
@@ -408,15 +419,16 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block;
   margin-bottom: 0.75rem;
   padding: 0.5rem;
-  background-color: rgba(0,0,0,0.06);
-  border-radius: 0.5rem;
-  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 0.75rem;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 .image-preview-container img {
   max-height: 90px;
   max-width: 100%;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   display: block;
 }
 
@@ -433,18 +445,28 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);
 }
 
 .input-wrapper {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: #FFFFFF;
-  padding: 0.4rem 0.6rem;
-  border-radius: 0.75rem;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  background: rgba(255, 255, 255, 0.85);
+  padding: 0.45rem 0.75rem;
+  border-radius: 1rem;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03), inset 0 1px 2px rgba(255, 255, 255, 0.95);
   width: 100%;
+  transition: all 0.25s ease;
+}
+
+.input-wrapper:focus-within {
+  background: #FFFFFF;
+  border-color: var(--primary);
+  box-shadow: 0 6px 24px rgba(16, 185, 129, 0.15), 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
 #chat-input {
@@ -474,7 +496,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .icon-btn:hover {
-  background-color: #F1F5F9;
+  background: rgba(255, 255, 255, 0.8);
   color: var(--text-main);
 }
 
@@ -483,11 +505,12 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--bone);
   border: none;
   padding: 0.65rem 1.25rem;
-  border-radius: 0.5rem;
+  border-radius: 0.65rem;
   font-weight: 500;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -497,6 +520,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .primary-btn:hover {
   background-color: var(--primary-hover);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35);
+  transform: translateY(-1px);
 }
 
 .primary-btn:active {
@@ -522,16 +547,17 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.5rem;
 }
 
-/* Account Card */
+/* Account Card - Frosted Glass Card */
 .account-card {
   margin: 2rem 2.5rem;
-  background-color: var(--bg-panel);
-  border: 1px solid var(--border-color);
-  border-radius: 1rem;
-  padding: 2rem;
-  max-width: 500px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: var(--bg-panel);
+  border: 1px solid var(--glass-border);
+  border-radius: 1.25rem;
+  padding: 2.25rem;
+  max-width: 520px;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow-lg), var(--glass-inner-glow);
 }
 
 .profile-header {
@@ -550,7 +576,8 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
 }
 
 .profile-info h3 {
@@ -587,7 +614,7 @@ h1, h2, h3, h4, h5, h6 {
   40% { transform: scale(1); }
 }
 
-/* Weather Widget */
+/* Weather Widget - Floating Glass Element */
 .sidebar-weather-container {
   margin-bottom: 1rem;
   padding: 0 0.25rem;
@@ -599,13 +626,72 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.75rem;
-  padding: 0.85rem;
-  background-color: rgba(255, 255, 255, 0.4);
-  border: 1px solid var(--border-color);
-  border-radius: 0.75rem;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  padding: 0.95rem;
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid var(--glass-border);
+  border-radius: 0.85rem;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
   width: 100%;
+  transition: all 0.25s ease;
+}
+
+.weather-widget:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: var(--glass-shadow-lg), var(--glass-inner-glow);
+}
+
+/* Glassmorphism Reusable Component Utilities */
+.glass-panel {
+  background: var(--bg-panel);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
+  border-radius: 1.25rem;
+}
+
+.glass-card {
+  background: var(--bg-panel);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
+  border-radius: 1rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.glass-card:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--glass-border-highlight);
+  transform: translateY(-2px);
+  box-shadow: var(--glass-shadow-lg), var(--glass-inner-glow);
+}
+
+.glass-pill {
+  background: var(--bg-glass-subtle);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  border: 1px solid var(--glass-border);
+  border-radius: 9999px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: var(--glass-blur-sm) !important;
+  -webkit-backdrop-filter: var(--glass-blur-sm) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03) !important;
+  transition: all 0.2s ease !important;
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15), inset 0 1px 2px rgba(0, 0, 0, 0.02) !important;
 }
 
 .weather-widget.loading, .weather-widget.error {
