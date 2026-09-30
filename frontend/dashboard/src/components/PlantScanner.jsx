@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { 
   Camera, Upload, Sparkles, RefreshCw, CheckCircle2, 
   AlertTriangle, AlertCircle, ShieldAlert, Leaf, MessageSquare, Download, 
-  SwitchCamera, Zap, Info, ArrowRight, Lock, X, FileCheck
+  SwitchCamera, Zap, Info, ArrowRight, Lock, X, FileCheck, ScanLine
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { predictPlantDisease } from '../services/predictApi';
