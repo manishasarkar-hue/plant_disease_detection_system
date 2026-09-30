@@ -37,7 +37,7 @@ function DashboardContent() {
   };
 
   return (
-    <div className="app-container">
+    <div className={`app-container ${activeTab === 'account' ? 'clay-account-active' : ''}`}>
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
       <main className="main-content">
         {renderContent()}
