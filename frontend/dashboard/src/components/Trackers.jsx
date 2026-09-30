@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Droplet, Bug, Sprout, Activity, Plus, Calendar, Save, 
-  TrendingUp, BarChart2, Zap, Sparkles, Calculator, 
+  TrendingUp, Sparkles, Calculator, 
   AlertTriangle, CheckCircle2, Trash2, Download, Search, 
   Sun, CloudRain, Wind, CloudSun, Clock, ChevronRight,
-  ShieldCheck, HelpCircle, Layers, Scissors, Info
+  ShieldCheck, Layers, Scissors, Info
 } from 'lucide-react';
 import '../styles/trackers.css';
 
@@ -109,7 +109,7 @@ const Trackers = () => {
   const [customName, setCustomName] = useState('');
   const [customUnit, setCustomUnit] = useState('Units');
   const [customTarget, setCustomTarget] = useState(100);
-  const [customColor, setCustomColor] = useState('mint');
+  const [customColor] = useState('mint');
 
   // Interactive Precision Dosage Calculator Modal State
   const [showCalculator, setShowCalculator] = useState(false);
