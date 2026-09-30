@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { 
   Camera, Upload, Sparkles, RefreshCw, CheckCircle2, 
