@@ -252,6 +252,192 @@ python scripts/08_create_dataset_split.py
 
 ---
 
+## 🌿 Real ML Model Inference Engine (PlantGuard EfficientNetB0)
+
+PlantGuard AI runs real-time plant disease detection powered by a fine-tuned **EfficientNetB0** model trained on PlantVillage. The model resides strictly on the backend, ensuring security, performance, and memory-resident inference.
+
+### 📐 Architecture Overview
+
+```text
+React Frontend (Vite @ :5173)
+       │
+       ▼  POST /api/predict (multipart/form-data: image)
+Node.js Express Gateway (:5000)
+       │
+       ▼  Forwarded request
+Python ML Service (FastAPI / Uvicorn @ :8000)
+       │
+       ▼  Preprocess: PIL → RGB → 224x224 → [0, 255] float32 tensor
+PlantGuard EfficientNetB0 (.keras in memory)
+       │
+       ▼  15-class Softmax probability vector
+Prediction JSON { className, confidence, topPredictions, threshold }
+       │
+       ▼
+Real Disease & Confidence Display in PlantScanner UI
+```
+
+---
+
+### 📦 1. Model File Placement & Configuration
+
+Place your trained Keras model (`plantguard_model.keras` or `plantguard_efficientnet_best.keras`) in:
+```text
+ml-service/models/plantguard_model.keras
+```
+*(Also automatically searched in `./models/plantguard_model.keras` or `../ml/models/plantguard_model.keras`).*
+
+#### Environment Variables (`ml-service/.env`):
+```ini
+# Path to the trained Keras model file
+MODEL_PATH=./models/plantguard_model.keras
+
+# Confidence threshold (0.0 to 1.0) for high-confidence match
+MODEL_CONFIDENCE_THRESHOLD=0.60
+
+# Port for ML inference service
+PORT=8000
+```
+
+---
+
+### 🚀 2. Running the Full Stack
+
+#### Step 1: Start the Python ML Inference Service
+```bash
+# From workspace root
+cd ml-service
+
+# Install dependencies (if not already installed in your virtual environment)
+pip install -r requirements.txt
+
+# Start the ML service (loads model once into memory)
+uvicorn app:app --host 127.0.0.1 --port 8000
+```
+- **Health Check**: `GET http://127.0.0.1:8000/api/health`
+- **Model Info**: `GET http://127.0.0.1:8000/api/model-info`
+
+#### Step 2: Start the Backend Gateway (Node.js / Express)
+```bash
+# In a new terminal
+cd server
+npm install
+node server.js
+```
+- **Port**: `http://localhost:5000`
+- **Predict Route**: `POST http://localhost:5000/api/predict`
+
+#### Step 3: Start the React Dashboard
+```bash
+# In a new terminal
+cd frontend/dashboard
+npm install
+npm run dev
+```
+- **Web App**: [http://localhost:5173](http://localhost:5173)
+
+---
+
+### 🏷️ 3. Supported 15 Class Labels
+
+The model classifies across 15 distinct PlantVillage categories:
+
+| Index | Raw Class Name | Human-Readable Name | Crop | Health Status |
+|:---:|:---|:---|:---|:---:|
+| 0 | `Pepper__bell___Bacterial_spot` | Pepper Bell — Bacterial Spot | Bell Pepper | Infected |
+| 1 | `Pepper__bell___healthy` | Pepper Bell — Healthy | Bell Pepper | **Healthy** |
+| 2 | `Potato___Early_blight` | Potato — Early Blight | Potato | Infected |
+| 3 | `Potato___Late_blight` | Potato — Late Blight | Potato | Infected |
+| 4 | `Potato___healthy` | Potato — Healthy | Potato | **Healthy** |
+| 5 | `Tomato_Bacterial_spot` | Tomato — Bacterial Spot | Tomato | Infected |
+| 6 | `Tomato_Early_blight` | Tomato — Early Blight | Tomato | Infected |
+| 7 | `Tomato_Late_blight` | Tomato — Late Blight | Tomato | Infected |
+| 8 | `Tomato_Leaf_Mold` | Tomato — Leaf Mold | Tomato | Infected |
+| 9 | `Tomato_Septoria_leaf_spot` | Tomato — Septoria Leaf Spot | Tomato | Infected |
+| 10 | `Tomato_Spider_mites_Two_spotted_spider_mite` | Tomato — Two-Spotted Spider Mite | Tomato | Infected |
+| 11 | `Tomato__Target_Spot` | Tomato — Target Spot | Tomato | Infected |
+| 12 | `Tomato__Tomato_YellowLeaf__Curl_Virus` | Tomato — Yellow Leaf Curl Virus | Tomato | Infected |
+| 13 | `Tomato__Tomato_mosaic_virus` | Tomato — Mosaic Virus | Tomato | Infected |
+| 14 | `Tomato_healthy` | Tomato — Healthy | Tomato | **Healthy** |
+
+---
+
+### 📡 4. Prediction API Specifications
+
+#### `POST /api/predict`
+- **Content-Type**: `multipart/form-data`
+- **Body Field**: `image` (binary file)
+- **Supported Formats**: `JPG`, `JPEG`, `PNG`, `WEBP`, `BMP` (up to 25 MB)
+
+#### Example Response:
+```json
+{
+  "success": true,
+  "prediction": {
+    "className": "Tomato_Early_blight",
+    "formattedName": "Tomato Early Blight",
+    "crop": "Tomato",
+    "condition": "Early Blight",
+    "severity": "moderate",
+    "isHealthy": false,
+    "confidence": 0.9934,
+    "confidencePercentage": 99.34
+  },
+  "topPredictions": [
+    {
+      "className": "Tomato_Early_blight",
+      "formattedName": "Tomato Early Blight",
+      "crop": "Tomato",
+      "condition": "Early Blight",
+      "confidence": 0.9934,
+      "confidencePercentage": 99.34,
+      "isHealthy": false
+    },
+    {
+      "className": "Pepper__bell___Bacterial_spot",
+      "formattedName": "Pepper Bell - Bacterial Spot",
+      "crop": "Bell Pepper",
+      "condition": "Bacterial Spot",
+      "confidence": 0.0034,
+      "confidencePercentage": 0.34,
+      "isHealthy": false
+    },
+    {
+      "className": "Tomato_Late_blight",
+      "formattedName": "Tomato Late Blight",
+      "crop": "Tomato",
+      "condition": "Late Blight",
+      "confidence": 0.0020,
+      "confidencePercentage": 0.20,
+      "isHealthy": false
+    }
+  ],
+  "threshold": 0.60,
+  "isConfident": true
+}
+```
+
+#### `GET /api/health`
+```json
+{
+  "status": "ok",
+  "modelLoaded": true
+}
+```
+
+#### `GET /api/model-info`
+```json
+{
+  "model": "PlantGuard EfficientNetB0",
+  "inputSize": "224x224",
+  "numClasses": 15,
+  "framework": "TensorFlow/Keras",
+  "loaded": true
+}
+```
+
+---
+
 ## 📚 Technical Documentation
 
 Explore the detailed sub-system documentation for in-depth guidance:
