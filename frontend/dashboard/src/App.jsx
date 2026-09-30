@@ -38,7 +38,7 @@ function DashboardContent() {
     }
   };
 
-  const isClayActive = activeTab === 'account' || activeTab === 'trackers';
+  const isClayActive = ['account', 'trackers', 'scheduler'].includes(activeTab);
 
   return (
     <div className={`app-container ${isClayActive ? 'clay-account-active' : ''}`}>
