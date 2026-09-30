@@ -11,7 +11,8 @@ import {
   BarChart2, 
   CloudSun, 
   ArrowRight, 
-  CheckCircle2 
+  CheckCircle2,
+  Compass 
 } from 'lucide-react';
 import '../styles/landing.css';
 
@@ -123,11 +124,21 @@ const LandingPage = () => {
           <h1>Save Your Harvest. <br/><span className="highlight">Detect Disease</span> Instantly.</h1>
           <p>Empower your farming with AI-driven plant disease detection. Upload a photo of a leaf and get instant, accurate diagnostics.</p>
           <div className="hero-buttons">
-            <button className="landing-btn-primary large" onClick={() => navigate('/dashboard')}>
-              Start Diagnosis <ArrowRight size={18} style={{ marginLeft: '6px' }} />
+            <button 
+              className="clay-hero-btn clay-hero-btn-primary" 
+              onClick={() => navigate('/dashboard')}
+              aria-label="Start Diagnosis"
+            >
+              <span>Start Diagnosis</span>
+              <ArrowRight size={22} className="hero-btn-icon" />
             </button>
-            <button className="landing-btn-secondary large" onClick={(e) => handleNavClick(e, '#features')}>
-              Explore Features
+            <button 
+              className="clay-hero-btn clay-hero-btn-secondary" 
+              onClick={(e) => handleNavClick(e, '#features')}
+              aria-label="Explore More"
+            >
+              <span>Explore More</span>
+              <Compass size={21} className="hero-btn-icon" />
             </button>
           </div>
         </div>
