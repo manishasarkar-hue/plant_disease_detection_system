@@ -2,6 +2,38 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { sendChatMessage, checkChatHealth } from '../services/chatApi';
 
 const STORAGE_KEY = 'plantguard_chat_history_v1';
+const ACTIVE_CONTEXT_KEY = 'plantGuardActiveScanContext';
+const PENDING_TRIGGER_KEY = 'plantGuardPendingConsultation';
+
+export function buildConsultationPrompt(context) {
+  if (!context) return '';
+  const isHealthy = context.isHealthy || context.severity === 'healthy';
+
+  if (isHealthy) {
+    return `I just analyzed my ${context.crop} plant foliage using the PlantGuard EfficientNetB0 AI Scanner, and it detected: Healthy & Disease-Free with ${context.confidence}% confidence.
+
+Please provide professional guidance on:
+1. Best routine cultural practices to keep this ${context.crop} crop thriving.
+2. Key environmental warning signs or early stress symptoms to monitor.
+3. Optimal organic fertilizer and watering schedule for this growth stage.`;
+  }
+
+  const symptomsList = (context.symptoms && context.symptoms.length > 0)
+    ? context.symptoms.map(s => `• ${s}`).join('\n')
+    : '• Foliar lesion/blight patterns identified by neural classifier.';
+
+  return `I just scanned my ${context.crop} foliage using the PlantGuard EfficientNetB0 AI Scanner, which detected ${context.diseaseName} (${context.scientificName || 'Crop Pathogen'}) with ${context.confidence}% confidence (Severity: ${context.severity}).
+
+Detected symptoms from the leaf scan:
+${symptomsList}
+
+Please act as my agricultural plant pathologist and provide:
+1. An explanation of what ${context.diseaseName} is, how the pathogen behaves, and what happens if left untreated.
+2. Immediate first-aid actions to halt disease progression today.
+3. Detailed step-by-step Organic & Biological Remedies (dilution rates, preparation, and application frequency).
+4. Recommended Chemical Fungicides / Pesticides with precise dosage per liter, safety precautions, and pre-harvest intervals.
+5. Cultural & environmental management (watering adjustments, mulching, air circulation, crop rotation).`;
+}
 
 export function useChat() {
   const [messages, setMessages] = useState(() => {
@@ -17,6 +49,16 @@ export function useChat() {
       console.warn('Could not read cached chat messages:', e);
     }
     return [];
+  });
+
+  const [activeScanContext, setActiveScanContext] = useState(() => {
+    try {
+      const saved = sessionStorage.getItem(ACTIVE_CONTEXT_KEY);
+      return saved ? JSON.parse(saved) : null;
+    } catch (e) {
+      console.warn('Could not read cached scan context:', e);
+      return null;
+    }
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -101,6 +143,66 @@ export function useChat() {
   }, [isLoading]);
 
   /**
+   * Process a consultation triggered from the AI Scanner
+   */
+  const triggerConsultation = useCallback((context) => {
+    if (!context) return;
+    setActiveScanContext(context);
+    try {
+      sessionStorage.setItem(ACTIVE_CONTEXT_KEY, JSON.stringify(context));
+    } catch (e) {
+      console.warn(e);
+    }
+    const prompt = buildConsultationPrompt(context);
+    sendMessage(prompt);
+  }, [sendMessage]);
+
+  // Check for pending consultation on mount or event
+  useEffect(() => {
+    const checkPending = () => {
+      try {
+        const pending = sessionStorage.getItem(PENDING_TRIGGER_KEY);
+        if (pending) {
+          sessionStorage.removeItem(PENDING_TRIGGER_KEY);
+          const parsed = JSON.parse(pending);
+          triggerConsultation(parsed);
+        }
+      } catch (e) {
+        console.warn('Error reading pending consultation:', e);
+      }
+    };
+
+    // Check immediately
+    checkPending();
+
+    // Listen for custom trigger event
+    const handleConsultEvent = (e) => {
+      if (e.detail) {
+        sessionStorage.removeItem(PENDING_TRIGGER_KEY);
+        triggerConsultation(e.detail);
+      }
+    };
+
+    window.addEventListener('plantGuardConsultScan', handleConsultEvent);
+    return () => {
+      window.removeEventListener('plantGuardConsultScan', handleConsultEvent);
+    };
+  }, [triggerConsultation]);
+
+  /**
+   * Clear active scan context
+   */
+  const clearScanContext = useCallback(() => {
+    setActiveScanContext(null);
+    try {
+      sessionStorage.removeItem(ACTIVE_CONTEXT_KEY);
+      sessionStorage.removeItem(PENDING_TRIGGER_KEY);
+    } catch (e) {
+      console.warn(e);
+    }
+  }, []);
+
+  /**
    * Retry the last sent user message
    */
   const retryLastMessage = useCallback(() => {
@@ -135,6 +237,9 @@ export function useChat() {
     error,
     lastUserMessage,
     healthInfo,
+    activeScanContext,
+    clearScanContext,
+    triggerConsultation,
     sendMessage,
     retryLastMessage,
     startNewChat,

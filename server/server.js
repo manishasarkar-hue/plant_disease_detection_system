@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import chatRouter from './routes/chat.js';
+import predictRouter from './routes/predict.js';
 
 // Load .env from server directory first, fallback to workspace root
 const __filename = fileURLToPath(import.meta.url);
@@ -31,6 +32,36 @@ app.use((req, res, next) => {
 
 // API Routes
 app.use('/api/chat', chatRouter);
+app.use('/api/predict', predictRouter);
+
+// Model health and info shortcuts
+const ML_SERVICE_URL = process.env.ML_SERVICE_URL || 'http://127.0.0.1:8000';
+
+app.get('/api/health', async (req, res) => {
+  try {
+    const mlHealth = await fetch(`${ML_SERVICE_URL}/api/health`);
+    if (mlHealth.ok) {
+      const data = await mlHealth.json();
+      return res.json(data);
+    }
+    return res.status(503).json({ status: 'degraded', modelLoaded: false });
+  } catch {
+    return res.status(503).json({ status: 'offline', modelLoaded: false, message: 'ML Service unreachable' });
+  }
+});
+
+app.get('/api/model-info', async (req, res) => {
+  try {
+    const infoRes = await fetch(`${ML_SERVICE_URL}/api/model-info`);
+    if (infoRes.ok) {
+      const data = await infoRes.json();
+      return res.json(data);
+    }
+    return res.status(503).json({ error: 'ML Service unavailable' });
+  } catch {
+    return res.status(503).json({ error: 'ML Service unreachable' });
+  }
+});
 
 // Root route
 app.get('/', (req, res) => {
@@ -40,7 +71,9 @@ app.get('/', (req, res) => {
     status: 'online',
     endpoints: {
       chat: 'POST /api/chat',
-      health: 'GET /api/chat/health',
+      predict: 'POST /api/predict',
+      health: 'GET /api/health',
+      modelInfo: 'GET /api/model-info',
     },
   });
 });

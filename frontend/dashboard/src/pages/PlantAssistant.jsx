@@ -2,6 +2,7 @@ import React from 'react';
 import ChatHeader from '../components/ChatHeader';
 import ChatWindow from '../components/ChatWindow';
 import ChatInput from '../components/ChatInput';
+import ScanContextBanner from '../components/ScanContextBanner';
 import { useChat } from '../hooks/useChat';
 import '../styles/chatbot.css';
 
@@ -11,6 +12,8 @@ const PlantAssistant = ({ setActiveTab }) => {
     isLoading,
     error,
     healthInfo,
+    activeScanContext,
+    clearScanContext,
     sendMessage,
     retryLastMessage,
     startNewChat,
@@ -25,6 +28,14 @@ const PlantAssistant = ({ setActiveTab }) => {
         messagesCount={messages.length}
         healthInfo={healthInfo}
       />
+
+      {activeScanContext && (
+        <ScanContextBanner
+          context={activeScanContext}
+          onClearContext={clearScanContext}
+          onSelectQuestion={sendMessage}
+        />
+      )}
 
       <ChatWindow
         messages={messages}
