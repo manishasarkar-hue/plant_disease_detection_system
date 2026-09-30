@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  User, Camera, Upload, Trash2, Check, Shield, Bell, Sprout, 
-  Settings, Key, Smartphone, Download, UploadCloud, RefreshCw, 
-  MapPin, Mail, Phone, Globe, Sliders, AlertTriangle, Eye, 
-  EyeOff, Save, CheckCircle2, Award, FileText, ChevronRight,
-  Database, Sparkles, Layers, Activity
+  User, Camera, Upload, Trash2, Shield, Bell, Sprout, 
+  Key, Smartphone, Download, MapPin, Mail, Sliders, 
+  Save, CheckCircle2, Award, Sparkles, Activity
 } from 'lucide-react';
 import '../styles/account.css';
 
@@ -88,7 +86,7 @@ const Account = () => {
   ]);
 
   // Activity Log
-  const [activities, setActivities] = useState([
+  const [activities] = useState([
     { id: 1, text: 'Logged in from Windows Chrome', time: 'Just now' },
     { id: 2, text: 'Performed AI Diagnosis on Tomato Leaf Blight', time: 'Yesterday at 3:45 PM' },
     { id: 3, text: 'Updated Water Schedule for Greenhouse Sector B', time: '2 days ago' },
