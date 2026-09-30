@@ -58,17 +58,20 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  background: transparent;
-  border: 1px solid transparent;
+  padding: 0.85rem 1.15rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--glass-border);
   color: var(--text-muted);
   cursor: pointer;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   text-align: left;
-  transition: all 0.2s;
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
   font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
 }
 
 @media (max-width: 1023px) {
@@ -79,15 +82,19 @@
 }
 
 .tracker-menu-btn:hover {
-  background-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.85);
   color: var(--text-main);
+  border-color: rgba(255, 255, 255, 0.95);
+  transform: translateX(2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 .tracker-menu-btn.active {
-  background-color: var(--tan);
-  color: var(--primary-hover);
-  border-color: rgba(136, 144, 99, 0.3);
+  background: rgba(16, 185, 129, 0.14);
+  color: #065F46;
+  border-color: rgba(16, 185, 129, 0.3);
   font-weight: 600;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9);
 }
 
 .add-custom-btn {
@@ -96,9 +103,11 @@
   justify-content: center;
   gap: 0.5rem;
   padding: 0.75rem;
-  background-color: transparent;
-  border: 1px dashed var(--border-color);
-  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  border: 1px dashed rgba(16, 185, 129, 0.4);
+  border-radius: 0.75rem;
   color: var(--text-muted);
   cursor: pointer;
   transition: all 0.2s;
@@ -110,7 +119,8 @@
 .add-custom-btn:hover {
   border-color: var(--primary);
   color: var(--primary);
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
 }
 
 .add-custom-form {
@@ -122,9 +132,11 @@
 
 .add-custom-form input {
   padding: 0.75rem;
-  border-radius: 0.5rem;
+  border-radius: 0.65rem;
   border: 1px solid var(--primary);
-  background-color: var(--bg-dark);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
   color: var(--text-main);
   outline: none;
   font-family: 'Inter', sans-serif;
@@ -202,8 +214,20 @@
 .custom-icon { color: #8b5cf6; }
 
 .inner-card {
-  background-color: rgba(255, 255, 255, 0.4);
-  padding: 1.25rem 1.5rem;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  padding: 1.35rem 1.6rem;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
+  transition: all 0.3s ease;
+}
+
+.inner-card:hover {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow: var(--glass-shadow-lg), var(--glass-inner-glow);
 }
 
 .next-schedule {
@@ -256,8 +280,11 @@
   height: 200px;
   padding: 1.75rem 1.5rem 1rem;
   border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02), var(--glass-shadow);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }

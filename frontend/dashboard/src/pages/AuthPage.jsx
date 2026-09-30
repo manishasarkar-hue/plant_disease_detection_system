@@ -98,7 +98,7 @@ const AuthPage = () => {
       {/* Top Navbar */}
       <header className="auth-top-nav">
         <div className="auth-brand" onClick={() => navigate('/')}>
-          <img src="/assets/logo.png" alt="Logo" className="auth-brand-logo" onError={(e) => { e.target.style.display = 'none'; }} />
+          <img src="/assets/logo.svg" alt="PlantCare AI Logo" className="auth-brand-logo" onError={(e) => { e.target.src = '/assets/logo.png'; }} />
           <span className="auth-brand-title">PlantCare AI</span>
         </div>
         <button className="auth-back-link" onClick={() => navigate('/dashboard')}>
